@@ -1,0 +1,2 @@
+__builtin_popcountll
+__builtin_clzll

@@ -1,0 +1,9 @@
+n = 1e5
+Insertion sort time  301390.000000 ms
+Bubble sort time  618430.000000 ms
+Selection sort time  148820.000000 ms
+
+For sorted arrays
+Insertion sort time  10.000000 ms
+Bubble sort time  0.000000 ms
+Selection sort time  148070.000000 ms
