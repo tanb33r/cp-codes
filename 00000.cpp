@@ -46,7 +46,7 @@ void solve() {
     pr(ans);
 }
 int main() {
-    ios::sync_with_stdio(0),cin.tie(0);
+    cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
     cin>>t;
     while(t--)
