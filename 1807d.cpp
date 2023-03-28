@@ -8,7 +8,7 @@
 #define  rall(v)            (v).rbegin(), (v).rend()
 #define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
 #define  AI(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n)a[I]=II; })
-#define  AO(a,n)            for(int I=0;I<n;I++)cout<<a[I]<<" ";cout<<"\n"
+#define  AO(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n){cout<<(I?" ":"")<<a[I];} cout<<'\n'; })
 #define  F                  first
 #define  S                  second
 #define  ps(x)              cout<<#x<<"\n"
@@ -20,7 +20,7 @@
 #define  cbit(n,p)          ((n)&(1LL<<(p)))
 #define  sbit(n,p)          ((n)|(1LL<<(p)))
 #define  tbit(n,p)          ((n)^(1LL<<(p)))
-#define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
 //#define  cerr               if(0)cerr
 
 using namespace std;
@@ -36,14 +36,31 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n;
-    cin>>n;
-    ll a[n];
+    ll n,q;
+    cin>>n>>q;
+    ll a[n+2] {};
+    ll pre[n+2] {};
     ll ans = 0;
-    f(i,n)cin>>a[i];
+    ll sum = 0;
+    ff(i,1,n+1) {
+        cin>>a[i];
+        sum+=a[i];
+        pre[i] = pre[i-1]+a[i];
+    }
 
+    while(q--) {
+        ll l,r,k;
+        cin>>l>>r>>k;
+        int dif = r-l+1;
+        ll rsum = (pre[r]-pre[l-1])%2;
+        ll ksum = (k*dif)%2;
 
-    pr(ans);
+        if(ksum == rsum) {
+            hmm(sum%2==1);
+        } else {
+            hmm(sum%2==0);
+        }
+    }
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -52,3 +69,5 @@ int main() {
     while(t--)
         solve();
 }
+
+

@@ -37,13 +37,23 @@ const int MAX = 2e5+5;
 
 void solve() {
     ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n)cin>>a[i];
+    string s;
+    char t[] = {'m','e','o','w'};
+    cin>>n>>s;
+    int j = 0;
+    f(i,n)
+    s[i] = tolower(s[i]);
+    f(i,n)
+    if(s[i]==t[j]) {
+        while(s[i]==t[j])i++;
+        j++;
+        i--;
+    } else {
+        ps(NO);
+        return;
+    }
 
-
-    pr(ans);
+    hmm(j==4);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);

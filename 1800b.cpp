@@ -36,12 +36,26 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n)cin>>a[i];
+    ll n,k;
+    string s;
+    cin>>n>>k>>s;
 
+    map<int,int> mp;
+    ll ans = 0;
+    f(i,n){
+    mp[s[i]]++;
+    }
+    ff(i,'a','z'+1){
+        ans += min(mp[i],mp[i-32]);
+    }
+    ff(i,'a','z'+1){
+        ll x = abs(mp[i]-mp[i-32]);
+        x/=2;
+        if(x and k>0){
+            ans+=min(k,x);
+            k-=min(k,x);
+        }
+    }
 
     pr(ans);
 }

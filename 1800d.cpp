@@ -37,14 +37,36 @@ const int MAX = 2e5+5;
 
 void solve() {
     ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n)cin>>a[i];
-
+    string s;
+    cin>>n>>s;
+    s+='#';
+    vector<int> v;
+    ll ans = n-1;
+    f(i,n) {
+        int cnt = 1;
+        while(s[i]==s[i+1]) {
+            cnt++;
+            i++;
+        }
+        v.pb(cnt);
+    }
+    f(i,v.size()) {
+        if(v[i]>2)ans-=(v[i]-2);
+    }
+    f(i,n-2) {
+        if(s[i]==s[i+2] and s[i]!=s[i+1])
+            ans--;
+        else if(i<n-3)
+            if(s[i]==s[i+2] and s[i+3]==s[i+1] and s[i]!=s[i+1])
+                ans--;
+    }
+//    vout(v);
 
     pr(ans);
 }
+
+
+
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;

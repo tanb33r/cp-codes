@@ -40,11 +40,20 @@ void solve() {
     cin>>n;
     ll a[n];
     ll ans = 0;
-    f(i,n)cin>>a[i];
+    priority_queue<int> pq;
 
-
+    f(i,n) {
+        cin>>a[i];
+        if(!a[i] and !pq.empty()) {
+            ans+=pq.top();
+            pq.pop();
+        } else {
+            pq.push(a[i]);
+        }
+    }
     pr(ans);
 }
+
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;

@@ -21,7 +21,7 @@
 #define  sbit(n,p)          ((n)|(1LL<<(p)))
 #define  tbit(n,p)          ((n)^(1LL<<(p)))
 #define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
-//#define  cerr               if(0)cerr
+#define  cerr               if(0)cerr
 
 using namespace std;
 void dbg_out() {
@@ -36,14 +36,35 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n)cin>>a[i];
+    ll n,m;
+    cin>>m;
+    ll a[50005] {};
+    map<int,int> mp;
+    map<int,int> ans;
+    f(i,m) {
+        cin>>n;
+//        debb(m,n);
+        f(j,n) {
+            int x;
+            cin>>x;
+            mp[x] = i+1;
+        }
+//        deb(i);z
+    }
 
+    for(auto [x,y]: mp) {
+             debb(x,y);
+             ans[y]=x;
+    }
+    if(ans.size()!=m) {
+        pr(-1);
+        return;
+    }
+    for(auto [x,y]: ans) {
+        cout<<y<<' ';
+    }
+    cout<<'\n';
 
-    pr(ans);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);

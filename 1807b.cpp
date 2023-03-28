@@ -8,7 +8,7 @@
 #define  rall(v)            (v).rbegin(), (v).rend()
 #define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
 #define  AI(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n)a[I]=II; })
-#define  AO(a,n)            for(int I=0;I<n;I++)cout<<a[I]<<" ";cout<<"\n"
+#define  AO(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n){cout<<(I?" ":"")<<a[I];} cout<<'\n'; })
 #define  F                  first
 #define  S                  second
 #define  ps(x)              cout<<#x<<"\n"
@@ -20,7 +20,7 @@
 #define  cbit(n,p)          ((n)&(1LL<<(p)))
 #define  sbit(n,p)          ((n)|(1LL<<(p)))
 #define  tbit(n,p)          ((n)^(1LL<<(p)))
-#define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
 //#define  cerr               if(0)cerr
 
 using namespace std;
@@ -40,10 +40,15 @@ void solve() {
     cin>>n;
     ll a[n];
     ll ans = 0;
-    f(i,n)cin>>a[i];
+    ll ev=0;
+    ll odd=0;
+    f(i,n) {
+        cin>>a[i];
 
-
-    pr(ans);
+        if(a[i]%2==0)ev+=a[i];
+        else odd+=a[i];
+    }
+    hmm(ev>odd);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -52,3 +57,5 @@ int main() {
     while(t--)
         solve();
 }
+
+

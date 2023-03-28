@@ -8,7 +8,7 @@
 #define  rall(v)            (v).rbegin(), (v).rend()
 #define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
 #define  AI(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n)a[I]=II; })
-#define  AO(a,n)            for(int I=0;I<n;I++)cout<<a[I]<<" ";cout<<"\n"
+#define  AO(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n){cout<<(I?" ":"")<<a[I];} cout<<'\n'; })
 #define  F                  first
 #define  S                  second
 #define  ps(x)              cout<<#x<<"\n"
@@ -20,7 +20,7 @@
 #define  cbit(n,p)          ((n)&(1LL<<(p)))
 #define  sbit(n,p)          ((n)|(1LL<<(p)))
 #define  tbit(n,p)          ((n)^(1LL<<(p)))
-#define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
 //#define  cerr               if(0)cerr
 
 using namespace std;
@@ -36,14 +36,28 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n)cin>>a[i];
+    ll n=4;
+    map<char,int>m;
+    f(i,n) {
+        char c ;
+        cin>>c;
+        m[c]++;
+    }
+    if(m.size()>=3) {
+        pr(4);
+        return;
+    }
+    if(m.size()==1)  {
+        pr(-1);
+        return;
+    }
+    int tw=0;
+    for(auto [x,y] : m) {
+        tw+= y==2;
+    }
 
+    cout<<(tw?4:6)<<'\n';
 
-    pr(ans);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -52,3 +66,5 @@ int main() {
     while(t--)
         solve();
 }
+
+

@@ -36,14 +36,12 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n)cin>>a[i];
-
-
-    pr(ans);
+    ll n,k,ok=1;
+    string s,t;
+    cin>>n>>k>>s>>t;
+    f(i,n)
+    ok&= (i<k and i>=n-k and s[i]!=t[i]);
+    hmm(ok);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);

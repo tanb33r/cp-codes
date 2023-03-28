@@ -37,18 +37,52 @@ const int MAX = 2e5+5;
 
 void solve() {
     ll n;
+    ll xd = (1<<27)-1;
+
     cin>>n;
+    bitset<32>b(xd);
+    deb(b);
     ll a[n];
     ll ans = 0;
-    f(i,n)cin>>a[i];
+    ll cnt[n] = 0;
+    ll even[n] = 0;
+    map<char,int> mp;
+    map<ll,int> mp2;
+    vector<ll> v;
+    f(i,n) {
+        mp.clear();
+        string s;
+        cin>>s;
+//        sort(all(s));
+        f(j,s.size()) {
+            mp[s[j]]=1;
+        }
+        for(auto [x,y] : mp) {
+            cnt[i] = sbit(bit,(x-'a'));
+            evem[i] = tbit(bit,(x-'a'));
+        }
+        //26 for even, 27 for odd
+        if(((int)s.size())%2)
+            bit = sbit(bit,27);
+        else
+            bit = sbit(bit,26);
+        mp2[bit]++;
+        v.pb(bit);
+        bitset<32>h(bit);
+        deb(h);
+    }
 
+    vout(v);
+    f(i,v.size()) {
+        ans+=mp[xd-v[i]];
 
-    pr(ans);
+    }
+    pr(ans/2);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-    cin>>t;
+//    cin>>t;
     while(t--)
         solve();
 }

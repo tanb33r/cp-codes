@@ -10,7 +10,10 @@ int main() {
     //ad
     int i=1;
     a.erase(1);
+//    1 index theke shb delete korbe
     cout<<a;
+    a.erase(0,1);
+//    erase 1st elemnt
 }
 
 

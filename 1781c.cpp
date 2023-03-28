@@ -8,7 +8,7 @@
 #define  rall(v)            (v).rbegin(), (v).rend()
 #define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
 #define  AI(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n)a[I]=II; })
-#define  AO(a,n)            for(int I=0;I<n;I++)cout<<a[I]<<" ";cout<<"\n"
+#define  AO(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n){cout<<(I?" ":"")<<a[I];} cout<<'\n'; })
 #define  F                  first
 #define  S                  second
 #define  ps(x)              cout<<#x<<"\n"
@@ -20,7 +20,7 @@
 #define  cbit(n,p)          ((n)&(1LL<<(p)))
 #define  sbit(n,p)          ((n)|(1LL<<(p)))
 #define  tbit(n,p)          ((n)^(1LL<<(p)))
-#define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
 //#define  cerr               if(0)cerr
 
 using namespace std;
@@ -37,13 +37,45 @@ const int MAX = 2e5+5;
 
 void solve() {
     ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n)cin>>a[i];
+    string s,t;
+    cin>>n>>s;
+    vector<vector<int>> pos(26);
+    f(i,n) pos[(int) (s[i] - 'a')].pb(i);
 
+    vector<int> order(26);
+    iota(all(order), 0);
+    sort(all(order), [&](int i, int j) {
+        return pos[i].size() > pos[j].size();
+    });
+    int best = 0;
+    ff(cnt,1,27) {
+        if(n%cnt==0) {
+            int cur = 0;
+            f(j,cnt) cur += min(n/cnt, (ll)pos[order[j]].size());
 
-    pr(ans);
+            if(cur>best) {
+                best=cur;
+                t = string(n, '#');
+                vector<char> extra;
+                f(j,cnt) {
+                    int i = order[j];
+                    for(int k = 0; k< n/cnt; k++) {
+                        if(k < (int) pos[i].size())
+                            t[pos[i][k]] = (char) ('a'+i);
+                        else
+                            extra.pb((char) ('a'+i));
+                    }
+                }
+                for (char& c : t)
+                    if (c == '#') {
+                        c = extra.back();
+                        extra.pop_back();
+                    }
+            }
+        }
+    }
+    pr(n-best);
+    pr(t);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -52,3 +84,5 @@ int main() {
     while(t--)
         solve();
 }
+
+

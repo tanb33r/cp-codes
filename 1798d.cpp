@@ -40,7 +40,18 @@ void solve() {
     cin>>n;
     ll a[n];
     ll ans = 0;
-    f(i,n)cin>>a[i];
+    vector<int>neg,pos;
+    f(i,n) {
+        cin>>a[i];
+        if(a[i]<0)
+            neg.pb(a[i]);
+        else
+            pos.pb(a[i]);
+    }
+
+    sort(a,a+n);
+    ll tot = a[n-1]-a[0];
+    vector<int>v;
 
 
     pr(ans);

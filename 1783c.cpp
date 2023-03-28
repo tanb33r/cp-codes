@@ -36,11 +36,34 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n;
-    cin>>n;
+    ll n,m;
+    cin>>n>>m;
     ll a[n];
+    ll b[n];
     ll ans = 0;
-    f(i,n)cin>>a[i];
+    f(i,n) {
+        cin>>a[i];
+        b[i]=a[i];
+    }
+    sort(b,b+n);
+    ll sum = 0;
+    ll cnt = 0;
+    ll mx = 0;
+    f(i,n)
+    if(sum+b[i]<=m) {
+        cnt++;
+        sum+=b[i];
+        mx=max(mx,b[i]);
+    }
+    if(cnt==n) {
+        pr(1);
+        return;
+    }
+    ans = n-cnt+1;
+    int k = a[cnt];
+    int extra = m-sum;
+    if(k-mx<=(m-sum))
+        ans--;
 
 
     pr(ans);

@@ -39,11 +39,43 @@ void solve() {
     ll n;
     cin>>n;
     ll a[n];
+    ll b[n];
     ll ans = 0;
     f(i,n)cin>>a[i];
+    f(i,n)cin>>b[i];
+    ll mxa = *max_element(a,a+n);
+    ll mxb = *max_element(b,b+n);
+    if(mxa== a[n-1] and mxb==b[n-1]) {
+        cout<<"YES\n";
+        return;
+    }
 
+    f(i,n) {
+        if(a[i]> a[n-1] or  b[i]> b[n-1] )
+            swap(a[i],b[i]);
+    }
 
-    pr(ans);
+    mxa = *max_element(a,a+n);
+    mxb = *max_element(b,b+n);
+    if(mxa == a[n-1] and mxb==b[n-1]) {
+        cout<<"YES\n";
+        return;
+    }
+    swap(a[n-1],b[n-1]);
+
+    f(i,n) {
+        if(a[i]> a[n-1] or  b[i]> b[n-1] )
+            swap(a[i],b[i]);
+    }
+
+    mxa = *max_element(a,a+n);
+    mxb = *max_element(b,b+n);
+    if(mxa == a[n-1] and mxb==b[n-1]) {
+        cout<<"YES\n";
+        return;
+    }
+
+    cout<<"NO\n";
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);

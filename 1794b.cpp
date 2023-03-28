@@ -20,7 +20,7 @@
 #define  cbit(n,p)          ((n)&(1LL<<(p)))
 #define  sbit(n,p)          ((n)|(1LL<<(p)))
 #define  tbit(n,p)          ((n)^(1LL<<(p)))
-#define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
 //#define  cerr               if(0)cerr
 
 using namespace std;
@@ -41,9 +41,13 @@ void solve() {
     ll a[n];
     ll ans = 0;
     f(i,n)cin>>a[i];
-
-
-    pr(ans);
+    a[0]+=(a[0]==1);
+    f(i,n-1) {
+        a[i+1]+=(a[i+1]==1);
+        if(a[i+1]%a[i]==0)
+            a[i+1]++;
+    }
+    AO(a,n);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
