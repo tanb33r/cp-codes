@@ -8,7 +8,7 @@
 #define  rall(v)            (v).rbegin(), (v).rend()
 #define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
 #define  AI(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n)a[I]=II; })
-#define  AO(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n){cout<<(I?" ":"")<<a[I];} cout<<'\n'; })
+#define  AO(a,n)            for(int I=0;I<n;I++)cout<<a[I]<<" ";cout<<"\n"
 #define  F                  first
 #define  S                  second
 #define  ps(x)              cout<<#x<<"\n"
@@ -20,7 +20,7 @@
 #define  cbit(n,p)          ((n)&(1LL<<(p)))
 #define  sbit(n,p)          ((n)|(1LL<<(p)))
 #define  tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
 //#define  cerr               if(0)cerr
 
 using namespace std;
@@ -33,35 +33,48 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 }
 
 typedef pair<int,int> pii;
-const int MAX= 2e5+5;
+const int MAX = 2e5+5;
+
+int digit_sum(int n) {
+    int ret = 0;
+    while(n) {
+        ret += n % 10;
+        n /= 10;
+    }
+    return ret;
+}
+
 void solve() {
-    ll n,m;
-    cin>>n>>m;
-    vector<int>a(n + 1), last(n + 1);
-    map<int,int> mp;
-    f(i,n) cin>>a[i+1];
-    ff(i,1,m+1) {
-        int x, y;
-        cin>>x>>y;
-        mp[a[x]] += i - last[x];
-        last[x] = i;
-        a[x]=y;
+    int n, q;
+    cin >> n >> q;
+    vector<int> a(n);
+    set<int> s;
+    f(i,n) {
+        cin>>a[i];
+        if(a[i] > 9) s.insert(i);
     }
 
-    ff(i,1,n+1)
-    mp[a[i]] += m + 1 - last[i];
-
-    ll ans = (ll)m * (m + 1) * n;
-    for(auto [x,y] : mp)
-        ans -= (ll)y * (y - 1) / 2;
-    pr(ans);
+    while(q--) {
+        int x=II;
+        if(x==1) {
+            int l = II-1, r = II-1;
+            int frs=l;
+            while(!s.empty()) {
+                auto it = s.lower_bound(frs);
+                if(it==s.end() or *it>r) break;
+                a[*it] = digit_sum(a[*it]);
+                int ind = *it;
+                s.erase(it);
+                if(a[ind]>9) s.insert(ind);
+                frs = ind + 1;
+            }
+        } else pr(a[II-1]);
+    }
 }
 int main() {
-    ios::sync_with_stdio(0),cin.tie(0);
+    cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
     cin>>t;
     while(t--)
         solve();
 }
-
-

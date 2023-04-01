@@ -51,7 +51,7 @@ int d(int o, int e, bool win, bool alice) {
         if(alice)
             return dp[o][e][win][alice] = d(o-1,e, !win, !alice);
         else
-            return dp[o][e][win][alice] =d(o-1,e, win, !alice);
+            return dp[o][e][win][alice] = d(o-1,e, win, !alice);
 
     if(alice) {
         int ans1 = d(o-1,e,!win, !alice);
