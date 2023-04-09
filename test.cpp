@@ -1,23 +1,27 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
-int n,m,a[200004];
-void sol(){
-	scanf("%d%d",&n,&m);int ans=0;
-	for(int i=1;i<=n;i++)scanf("%d",&a[i]);
-	priority_queue<int>p,q;ll s=0;
-	for(int i=m+1;i<=n;i++){
-		s+=a[i];if(a[i]<0)p.push(-2*a[i]);
-		while(s<0)s+=p.top(),p.pop(),ans++;
-	}
-	s=0;
-	for(int i=m;i>1;i--){
-		s+=a[i];if(a[i]>0)q.push(a[i]*2);
-		while(s>0)s-=q.top(),q.pop(),ans++;
-	}
-	printf("%d\n",ans);
+void solve() {
+    ll n,m,x1,y1, x2, y2,value,value2;
+    cin >> n >> m >> x1 >> y1 >> x2>> y2;
+    value=4;
+    value2=4;
+
+    if(x1==1 || x1==n)
+        value--;
+    if(y1==1 || y1==m)
+        value--;
+    if(x2==1 || x2==n)
+        value2--;
+    if(y2==1 || y2==m)
+        value2--;
+    cout<<min(value,value2)<<endl;
 }
-int main(){
-	int t;scanf("%d",&t);
-	while(t--)sol();
+int main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
+    int t=1;
+    cin>>t;
+    while(t--)
+        solve();
 }
+
