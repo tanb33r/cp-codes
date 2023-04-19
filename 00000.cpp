@@ -40,10 +40,10 @@ void solve() {
     cin>>n;
     ll a[n];
     ll ans = 0;
-    f(i,n)cin>>a[i];
+    f(i,n) {
+        cin>>a[i];
+    }
 
-
-    pr(ans);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);

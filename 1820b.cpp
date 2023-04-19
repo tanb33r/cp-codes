@@ -36,66 +36,20 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n;
-    cin>>n;
-    ll a[n+5] {};
-    ll b[n+5] {};
-    ll ans = 0;
-    f(i,n) {
-        cin>>a[i+1];
-        b[i+1] = a[i+1];
+    string s;
+    cin>>s;
+    ll n = s.size();
+    ll ans = 0,cnt = 0;
+//    debb(s,s2);
+    f(i,n*2) {
+        if(s[i%n]=='1')cnt++;
+        else ans=max(ans,min(cnt,n)),cnt=0;
+        ans=max(ans,min(cnt,n));
     }
-    bool ok = is_sorted(a+1,a+n+1) ;
-    ok =1;
-//    a[0]  = -1e9;
-//    b[0]  = -1e9;
-//    int parbo = 0;
-    if(n==2 and a[1]>a[2]) {
-        ps(NO);
-        return;
-    }
+//    deb(ans);
+    if(ans!=n)cout<<((ans+1)/2)*((ans+2)/2)<<'\n';
+    else cout<<n*n<<'\n';
 
-
-//    ff(i,1,n-1) {
-//        if(a[i]>a[i+1]) {
-//            int dif = a[i]-a[i+1];
-//            a[i+1]+=dif;
-//            a[i+2]+=dif;
-//            parbo = 0;
-//        } else parbo = abs(a[i]-a[i+1]);
-//        ff(i,1,n+1) cout<<a[i]<<' ';cout<<'\n';
-    //}
-//    debb(n);
-    for(int i = n ; i>1 ; i-=2) {
-        int dif = abs(b[i-1]-b[i]);
-        if(b[i]<b[i-1]) {
-//            if(i==2) ok = 0;
-            b[i-2] -= (b[i-1]-b[i]);
-        }
-
-        else if(i-2>=1) b[i-2] += (b[i]-b[i-1]);
-    }
-
-//    if(a[n]>=a[n-1]) ok = 1;
-    if(b[1]>b[2])   ok = 0;
-//    if(n&1) ok = 1;
-
-    hmm(ok);
-
-    /*
-    1 4
-    1 3 5 1
-    1 5
-    1 3 5 5 1
-    1 4
-    1 1 3 1 -1
-    1 4
-    1 4 1 -1
-    1 4
-    30 3 3 28
-    */
-
-//    pr(ans);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);

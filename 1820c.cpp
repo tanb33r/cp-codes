@@ -35,72 +35,57 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
-void solve() {
-    ll n;
-    cin>>n;
-    ll a[n+5] {};
-    ll b[n+5] {};
-    ll ans = 0;
-    f(i,n) {
-        cin>>a[i+1];
-        b[i+1] = a[i+1];
+int calc_mex(vector<int> a) {
+    sort(a.begin(), a.end());
+    int mex=0;
+    for (int x: a) {
+        if (mex==x) mex++;
     }
-    bool ok = is_sorted(a+1,a+n+1) ;
-    ok =1;
-//    a[0]  = -1e9;
-//    b[0]  = -1e9;
-//    int parbo = 0;
-    if(n==2 and a[1]>a[2]) {
-        ps(NO);
-        return;
-    }
-
-
-//    ff(i,1,n-1) {
-//        if(a[i]>a[i+1]) {
-//            int dif = a[i]-a[i+1];
-//            a[i+1]+=dif;
-//            a[i+2]+=dif;
-//            parbo = 0;
-//        } else parbo = abs(a[i]-a[i+1]);
-//        ff(i,1,n+1) cout<<a[i]<<' ';cout<<'\n';
-    //}
-//    debb(n);
-    for(int i = n ; i>1 ; i-=2) {
-        int dif = abs(b[i-1]-b[i]);
-        if(b[i]<b[i-1]) {
-//            if(i==2) ok = 0;
-            b[i-2] -= (b[i-1]-b[i]);
-        }
-
-        else if(i-2>=1) b[i-2] += (b[i]-b[i-1]);
-    }
-
-//    if(a[n]>=a[n-1]) ok = 1;
-    if(b[1]>b[2])   ok = 0;
-//    if(n&1) ok = 1;
-
-    hmm(ok);
-
-    /*
-    1 4
-    1 3 5 1
-    1 5
-    1 3 5 5 1
-    1 4
-    1 1 3 1 -1
-    1 4
-    1 4 1 -1
-    1 4
-    30 3 3 28
-    */
-
-//    pr(ans);
+    return mex;
 }
+
+bool solve() {
+    int n;
+    cin>>n;
+    vector<int> a(n);
+    for (int i=0; i<n; i++) {
+        cin>>a[i];
+    }
+    int mex=calc_mex(a);
+    if (!mex) return 1;
+
+    int lo=1e9;
+    int hi=-1e9;
+    f(i,n)
+    if (a[i]==mex+1) {
+        lo=min(lo,i);
+        hi=max(hi,i);
+    }
+
+    if (lo<=hi) {
+        for (int i=lo; i<=hi; i++) {
+            a[i]=-1;
+        }
+        if (calc_mex(a)<mex) return 0;
+        return 1;
+    }
+
+    vector<bool> seen(mex, 0);
+    f(i,n) {
+        if (a[i]<mex) {
+            if (seen[a[i]]) return 1;
+            seen[a[i]]=1;
+        }
+        if (a[i]>mex+1) return 1;
+    }
+    return 0;
+}
+
+
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
     cin>>t;
     while(t--)
-        solve();
+        hmm(solve());
 }

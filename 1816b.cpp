@@ -38,12 +38,36 @@ const int MAX = 2e5+5;
 void solve() {
     ll n;
     cin>>n;
-    ll a[n];
+    ll a[n] {};
+    ll b[n] {};
     ll ans = 0;
-    f(i,n)cin>>a[i];
+//    f(i,n)cin>>a[i];
+    int N = n*2;
+    a[0] = N;
+    b[n-1] = N-1;
+    int j  = N-2;
+    for(int i=2; i<n-1; i+=2) {
+        a[i] = j;
+        j-=2;
+    }
+    j=N-3;
+    for(int i=1; i<n-1; i+=2) {
+        b[i] = j;
+        j-=2;
+    }
+    j=1;
+    f(i,n) {
+        if(i&1)
+            a[i] = j;
+        else
+            b[i] = j;
+        j++;
+    }
 
+    f(i,n) cout<<a[i]<<' '; cout<<'\n';
+    f(i,n) cout<<b[i]<<' '; cout<<'\n';
 
-    pr(ans);
+//    pr(ans);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
