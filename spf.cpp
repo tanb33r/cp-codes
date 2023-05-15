@@ -1,20 +1,3 @@
-vector<int> get_primes(int n) {
-    int d = 2;
-    vector<int> ans;
-    while (d * d <= n) {
-        bool flag = false;
-        while (n % d == 0) {
-            n /= d;
-            flag = true;
-        }
-        if (flag) ans.push_back(d);
-        d++;
-    }
-    if (n != 1) ans.push_back(n);
-    return ans;
-}
-
-
 const int MAXN = 1e7 + 7;
 int spf[MAXN];
 vector<int> primes;

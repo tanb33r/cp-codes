@@ -2,10 +2,6 @@ __builtin_popcount
 __builtin_clz
 __builtin_ctz
 
-#define debug(a) cout<<"element is "<<a<<endl;
-#define debug2(a,b) cout<<"2 element is "<<a<<" "<<b<<endl;
-#define debug3(a,b,c) cout<<"3 element is "<<a<<" "<<b<<" "<<c<<endl;
-#define check(a) if(a==1)cout<<"h1 ";if(a==2) cout<<"h2 "; if(a==3)cout<<"h3 "; idk
 #define isOn(S, j) (S & (1 << j))
 #define setBit(S, j) (S |= (1 << j))
 #define clearBit(S, j) (S &= ~(1 << j))

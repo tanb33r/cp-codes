@@ -33,37 +33,54 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
     dbg_out(T...);
 }
 
+const ll inf = 1e17;
+const int MAX = 1e5;
+vector<ll> factors[MAX+5];
 typedef pair<int,int> pii;
-const int MAX = 2e5+5;
+
+void init() {
+    for (ll i = 1; i <= MAX; i++)
+        for (ll j = i; j <= MAX; j += i)
+            factors[j].pb(i);
+}
 
 void solve() {
-    ll n,x;
-    cin>>n>>x;
-    ll ans = 0;
+    ll n,m;
+    cin>>n>>m;
     ll a[n];
-    int cnt[x+1] {};
 
+    ll ans = 0;
+    f(i,n)cin>>a[i];
+    sort(a,a+n);
+
+    vector<ll> frequency(m + 5, 0);
+    ll curr_count = 0;
+    ll j = 0;
+    ll global_ans = inf;
     f(i,n) {
-        cin>>a[i];
-        cnt[a[i]]++;
-    }
-//    AO(cnt,x+1);
-    f(i,x) {
-        ll k = i;
-        if(cnt[k]>=(k+1)) {
-            cnt[k+1]+=cnt[k]/(k+1);
-            cnt[k]%=(k+1);
+        for (auto x : factors[a[i]]) {
+            if (x > m) break;
+            if (!frequency[x]++) curr_count++;
+        }
+        while(curr_count==m) {
+            ll curr_ans = a[i]-a[j];
+            global_ans = min(global_ans,curr_ans);
+            for (auto x : factors[a[j]]) {
+                if (x > m) break;
+                if (--frequency[x] == 0) curr_count--;
+            }
+            j++;
         }
     }
-//    AO(cnt,x+1);
-    f(i,x)
-    if(cnt[i]) vpr("No");
-    vpr("Yes");
+    cout << (global_ans >= inf ? -1 : global_ans) << "\n";
+
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
+    init();
     int t=1;
-//    cin>>t;
+    cin>>t;
     while(t--)
         solve();
 }
+

@@ -32,38 +32,45 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
     cerr << ' ' << H;
     dbg_out(T...);
 }
-
+ll n;
 typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
-void solve() {
-    ll n,x;
-    cin>>n>>x;
-    ll ans = 0;
-    ll a[n];
-    int cnt[x+1] {};
+bool check(ll int nn){
 
-    f(i,n) {
-        cin>>a[i];
-        cnt[a[i]]++;
-    }
-//    AO(cnt,x+1);
-    f(i,x) {
-        ll k = i;
-        if(cnt[k]>=(k+1)) {
-            cnt[k+1]+=cnt[k]/(k+1);
-            cnt[k]%=(k+1);
-        }
-    }
-//    AO(cnt,x+1);
-    f(i,x)
-    if(cnt[i]) vpr("No");
-    vpr("Yes");
+    ll int x=nn/3;
+    ll int y=nn/3;
+    ll int z=nn/3;
+
+    if(nn%3==1) x++;
+    if(nn%3==2) x++,y++;
+    ll int possible=2*1LL*(x*y+y*z+z*x);
+
+    return (possible>=n);
 }
+
+void solve(){
+
+    cin >> n;
+     ll int l=1,r=10000000;
+
+    int ans=0;
+    while(l<=r){
+        ll int mid=(l+r)/2;
+        if(check(mid)){
+            ans=mid;
+            r=mid-1;
+        }
+        else l=mid+1;
+    }
+    pr(ans);
+
+}
+
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-//    cin>>t;
+    cin>>t;
     while(t--)
         solve();
 }

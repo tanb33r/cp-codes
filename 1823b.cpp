@@ -6,14 +6,13 @@
 #define  eb                 emplace_back
 #define  all(v)             (v).begin(), (v).end()
 #define  rall(v)            (v).rbegin(), (v).rend()
-#define  vout(v)            f(I,(v).size())cout<<v[I]<<" ";cout<<"\n"
-#define  AI(a,n)            f(I,n)a[I]=II;
-#define  AO(a,n)            f(I,n)cout<<a[I]<<" ";cout<<"\n"
+#define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
+#define  AI(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n)a[I]=II; })
+#define  AO(a,n)            for(int I=0;I<n;I++)cout<<a[I]<<" ";cout<<"\n"
 #define  F                  first
 #define  S                  second
 #define  ps(x)              cout<<#x<<"\n"
 #define  pr(x)              cout<<x<<"\n"
-#define  vpr(x)             return void(pr(x))
 #define  deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
 #define  hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
 #define  ll                 long long
@@ -37,33 +36,25 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n,x;
-    cin>>n>>x;
-    ll ans = 0;
+    ll n,k;
+    cin>>n>>k;
     ll a[n];
-    int cnt[x+1] {};
-
+    ll cnt = 0;
+    ll ans = 0;
     f(i,n) {
         cin>>a[i];
-        cnt[a[i]]++;
+        cnt += (abs(a[i]-(i+1))%k)!=0;
     }
-//    AO(cnt,x+1);
-    f(i,x) {
-        ll k = i;
-        if(cnt[k]>=(k+1)) {
-            cnt[k+1]+=cnt[k]/(k+1);
-            cnt[k]%=(k+1);
-        }
-    }
-//    AO(cnt,x+1);
-    f(i,x)
-    if(cnt[i]) vpr("No");
-    vpr("Yes");
+//    debb(cnt);
+    if(!cnt)        pr(0);
+    else if(cnt==2) pr(1);
+    else            pr(-1);
+
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-//    cin>>t;
+    cin>>t;
     while(t--)
         solve();
 }

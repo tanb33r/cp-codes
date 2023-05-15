@@ -37,33 +37,33 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n,x;
-    cin>>n>>x;
-    ll ans = 0;
+    ll n;
+    cin>>n;
     ll a[n];
-    int cnt[x+1] {};
+    ll ans = 0;
+    ll ok = n;
+    f(i,n)cin>>a[i];
+    int x = count(a,a+n,a[0]);
+    if(x==n) {
+        if(a[0]==0)
+            vpr(0);
+        else
+            vpr(-1);
+    }
 
-    f(i,n) {
-        cin>>a[i];
-        cnt[a[i]]++;
+    f(j,n) {
+        int x = count(a,a+n,a[j]);
+        if(a[j]+x>n) ans++;
+        else ok=min(ok,n-x);
     }
-//    AO(cnt,x+1);
-    f(i,x) {
-        ll k = i;
-        if(cnt[k]>=(k+1)) {
-            cnt[k+1]+=cnt[k]/(k+1);
-            cnt[k]%=(k+1);
-        }
-    }
-//    AO(cnt,x+1);
-    f(i,x)
-    if(cnt[i]) vpr("No");
-    vpr("Yes");
+//    }
+//    debb(ok);
+    pr(ok);
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-//    cin>>t;
+    cin>>t;
     while(t--)
         solve();
 }

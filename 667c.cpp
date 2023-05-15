@@ -32,33 +32,28 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
     cerr << ' ' << H;
     dbg_out(T...);
 }
+const int MAX=1e4+9;
+bool m[MAX][5];
+string s;
+set<string> ans;
+void dp(int n, int l) {
+    if(m[n][l] or n-l<5) return;
+    m[n][l] = 1;
+    string ls = s.substr(n-l,l);
+    string rs = s.substr(n-2*l,l);
+    ans.insert(ls);
+    if(ls != rs) dp(n-l,l);
+    dp(n-l,5-l);
+}
 
-typedef pair<int,int> pii;
-const int MAX = 2e5+5;
 
 void solve() {
-    ll n,x;
-    cin>>n>>x;
-    ll ans = 0;
-    ll a[n];
-    int cnt[x+1] {};
+    cin>>s;
+    dp(s.size(),2);
+    dp(s.size(),3);
+    cout<<ans.size()<<'\n';
+    for (auto i:ans) cout<<i<<'\n';
 
-    f(i,n) {
-        cin>>a[i];
-        cnt[a[i]]++;
-    }
-//    AO(cnt,x+1);
-    f(i,x) {
-        ll k = i;
-        if(cnt[k]>=(k+1)) {
-            cnt[k+1]+=cnt[k]/(k+1);
-            cnt[k]%=(k+1);
-        }
-    }
-//    AO(cnt,x+1);
-    f(i,x)
-    if(cnt[i]) vpr("No");
-    vpr("Yes");
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
@@ -67,3 +62,5 @@ int main() {
     while(t--)
         solve();
 }
+
+

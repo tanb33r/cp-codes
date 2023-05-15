@@ -8,7 +8,7 @@
 #define  rall(v)            (v).rbegin(), (v).rend()
 #define  vout(v)            f(I,(v).size())cout<<v[I]<<" ";cout<<"\n"
 #define  AI(a,n)            f(I,n)a[I]=II;
-#define  AO(a,n)            f(I,n)cout<<a[I]<<" ";cout<<"\n"
+#define  AO(a,n)            f(I,n)cout<<a[I]<<"";cout<<"\n"
 #define  F                  first
 #define  S                  second
 #define  ps(x)              cout<<#x<<"\n"
@@ -37,33 +37,24 @@ typedef pair<int,int> pii;
 const int MAX = 2e5+5;
 
 void solve() {
-    ll n,x;
-    cin>>n>>x;
-    ll ans = 0;
+    ll n,q;
+    cin>>n>>q;
     ll a[n];
-    int cnt[x+1] {};
+    ll ans[n] {};
+    f(i,n) cin>>a[i];
+    ll Q = 0 ;
+    fr(i,n,0)
+    if(Q>=a[i])ans[i]=1;
+    else if(Q<q)Q++,ans[i]=1;
 
-    f(i,n) {
-        cin>>a[i];
-        cnt[a[i]]++;
-    }
-//    AO(cnt,x+1);
-    f(i,x) {
-        ll k = i;
-        if(cnt[k]>=(k+1)) {
-            cnt[k+1]+=cnt[k]/(k+1);
-            cnt[k]%=(k+1);
-        }
-    }
-//    AO(cnt,x+1);
-    f(i,x)
-    if(cnt[i]) vpr("No");
-    vpr("Yes");
+    AO(ans,n);
+
 }
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-//    cin>>t;
+    cin>>t;
     while(t--)
         solve();
 }
+
