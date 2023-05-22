@@ -1,92 +1,159 @@
-#include <bits/stdc++.h>
-#define  f(i,n)             for(int i=0; i<(n); i++)
-#define  ff(i,a,n)          for(int i=a;i<n;i++)
-#define  fr(i,a,n)          for(int i=a-1;i>=n;i--)
-#define  pb                 push_back
-#define  eb                 emplace_back
-#define  all(v)             (v).begin(), (v).end()
-#define  rall(v)            (v).rbegin(), (v).rend()
-#define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
-#define  AI(a)              ({int n=sizeof(a)/sizeof(a[0]); f(I,n)a[I]=II; })
-#define  AO(a,n)            for(int I=0;I<n;I++)cout<<a[I]<<" ";cout<<"\n"
-#define  F                  first
-#define  S                  second
-#define  ps(x)              cout<<#x<<"\n"
-#define  vpr(x)             return void(pr(x))
-#define  pr(x)              cout<<x<<"\n"
-#define  vps(x)             return void(cout<<#x<<"\n")
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <time.h>
 
-#define  deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
-#define  hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
-#define  ll                 long long
-#define  II                 ({ll t;cin>>t;t;})
-#define  cbit(n,p)          ((n)&(1LL<<(p)))
-#define  sbit(n,p)          ((n)|(1LL<<(p)))
-#define  tbit(n,p)          ((n)^(1LL<<(p)))
-#define  debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
-//#define  cerr               if(0)cerr
+#define MAX_N 10001
 
-using namespace std;
-void dbg_out() {
-    cerr << endl;
-}
-template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
-    cerr << ' ' << H;
-    dbg_out(T...);
-}
+bool matrix[MAX_N][MAX_N];
+int main() {
+    int n, i, j, k, count, sum, is_symmetric, is_antisymmetric, is_reflexive, is_transitive, is_function;
+    clock_t start, end;
+    struct timespec tstart={0,0}, tend={0,0};
 
-ll sum(ll n) {
-//        long long sum =0;
-    return (n*(n+1))/2;
-}
-void solve() {
- vpr(3);
- vpr(3);
- vpr(3);
- int n =3;
-    vector<int> v;
-    for(int i=1; i<=n; i++) {
-        v.pb(i);
-    }
-    vout(v);
-    ll s = 0;
-    for(int k = 2; k<n; k++) {
+    time_t now, later;
+    printf("Enter the number of distinct elements: ");
+    scanf("%d", &n);
 
-        f(x,k)
-        s+=v[x];
-        debb(s);
-        if(s%k==0)
-            vout(v);
-        int x = 0;
-        while(x+k<n) {
-
-            if(s%k==0)
-                vout(v);
-
-
-            s-=v[x];
-            s+=v[x+k];
-            x++;
+    // Generate random matrix
+    srand(time(NULL));
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            matrix[i][j] = rand() % 2;
         }
     }
 
+    // Print matrix
+//    printf("The generated matrix is:\n");
+//    for (i = 0; i < n; i++) {
+//        for (j = 0; j < n; j++) {
+//            printf("%d ", matrix[i][j]);
+//        }
+//        printf("\n");
+//    }
 
+    // Verify properties
+    time(&now);
+    start = clock();
+
+        clock_gettime(CLOCK_MONOTONIC, &tstart);
+{
+//for (i = 0; i < 10000; i++) {
+//        for (j = 0; j < 10000; j++) {
+//           int x = 0;
+//        }
+//    }
+    // Symmetry
+    is_symmetric = 1;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (matrix[i][j] != matrix[j][i]) {
+                is_symmetric = 0;
+                break;
+            }
+        }
+        if (!is_symmetric) {
+            break;
+        }
+    }
+    if (is_symmetric) {
+        printf("The matrix is symmetric.\n");
+    } else {
+        printf("The matrix is not symmetric.\n");
+    }
+
+    // Antisymmetry
+    is_antisymmetric = 1;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (matrix[i][j] == 1 && matrix[j][i] == 1 && i != j) {
+                is_antisymmetric = 0;
+                break;
+            }
+        }
+        if (!is_antisymmetric) {
+            break;
+        }
+    }
+    if (is_antisymmetric) {
+        printf("The matrix is antisymmetric.\n");
+    } else {
+        printf("The matrix is not antisymmetric.\n");
+    }
+
+    // Reflexivity
+    is_reflexive = 1;
+    for (i = 0; i < n; i++) {
+        if (matrix[i][i] != 1) {
+            is_reflexive = 0;
+            break;
+        }
+    }
+    if (is_reflexive) {
+        printf("The matrix is reflexive.\n");
+    } else {
+        printf("The matrix is not reflexive.\n");
+    }
+
+    // Transitivity
+    is_transitive = 1;
+    for (i = 0; i < n; i++) {
+        for (j = 0; j < n; j++) {
+            if (matrix[i][j] == 1) {
+                for (k = 0; k < n; k++) {
+                    if (matrix[j][k] == 1 && matrix[i][k] != 1) {
+                        is_transitive = 0;
+                        break;
+                    }
+                }
+            }
+            if (!is_transitive) {
+                break;
+            }
+        }
+        if (!is_transitive) {
+            break;
+        }
+    }
+    if (is_transitive) {
+        printf("The matrix is transitive.\n");
+    } else {
+        printf("The matrix is not transitive.\n");
+    }
+
+    // Function property
+    is_function = 1;
+    for (i = 0; i < n; i++) {
+        count = 0;
+        for (j = 0; j < n; j++) {
+            if (matrix[i][j] == 1) {
+                count++;
+                if (count > 1) {
+                    is_function = 0;
+                    break;
+                }
+            }
+        }
+        if (is_function == 0) {
+            break;
+        }
+    }
+    if (is_function) {
+        printf("The relation represents a function.\n");
+    } else {
+        printf("The relation does not represent a function.\n");
+    }
 }
 
+    time(&later);
+    end = clock();
+        clock_gettime(CLOCK_MONOTONIC, &tend);
 
-int main() {
-    vector<int> v = {1,2,3};
-//    vpr("asd");
-   solve();
-
-//    ios::sync_with_stdio(0);
-//    cin.tie(0);
-//    int t=1;
-    //cin>>t;
-//    int i ;
-//    cin>>i;
-//    for(int i=1; i<=100; i++) {
-//    solve(i);
-//    }
+    double time_taken = ((double)(end - start)) * 1000 / CLOCKS_PER_SEC;
+    double seconds = difftime(later, now);
+    printf("Computational time (excluding printing time) is %.30lf milliseconds.\n", time_taken);
+    printf("Computational time (excluding printing time) is %.30lf milliseconds.\n", seconds);
+     printf("Computational time (excluding printing time) is %.5f milliseconds\n",(((double)tend.tv_sec + 1.0e-9*tend.tv_nsec) -
+           ((double)tstart.tv_sec + 1.0e-9*tstart.tv_nsec))*1000);
     return 0;
 }

@@ -62,61 +62,72 @@ void solve() {
     init();
     cin>>n>>m;
     s.clear();
-    s.resize(n);
+    s.resize(n+1);
     W=0;
     ll ans = 0;
-    bitset<155> r[n+1];
-    bitset<155> l[n+1];
-    f(i,n) cin>>s[i];
-    f(i,n) f(j,m) W+=s[i][j]=='W';
+    bool r[n+1][m];
+    bool l[n+1][m];
+    f(i,n) {
+        cin>>s[i];
+        W += count(all(s[i]),'W');
+    }
+    s[n] = string(m,'G');
+
     f(i,n) {
         bool w = 0;
-        if(i<n-1) {
-            if(i&1)
-                f(j,s[i].size()) {
-                w |= s[i][j]=='W' || s[i+1][j]=='W';
-                l[i][j]=w;
-            } else
-                fr(j,s[i].size(),0) {
-                w |= s[i][j]=='W' || s[i+1][j]=='W';
-                r[i][j]=w;
-            }
+        if(i&1)
+            f(j,m) {
+            w |= s[i][j]=='W' || s[i+1][j]=='W';
+            l[i][j]=w;
+            r[i][j]=0;
+        } else
+            fr(j,m,0) {
+            w |= s[i][j]=='W' || s[i+1][j]=='W';
+            r[i][j]=w;
+            l[i][j]=0;
         }
     }
+
+
+//    f(i,n) {
+//        f(j,m) cout<<r[i][j];
+//        pr("");
+//    }
+//    pr("");
+//    f(i,n) {
+//        f(j,m) cout<<l[i][j];
+//        pr("");
+//    }
+//    pr("");
+
+
     int mov = 0;
     int j = 0;
+    int w = 0;
     f(i,n) {
-        w+=s[i][j]=='W';
         while(1) {
-                if(w==W) vpr(mov);
+            w+=s[i][j]=='W';
+            if(w==W) vpr(mov);
 
-
-            dir = (i&1)? -1:1;
-            if((j==0 and dir==-1) or (dir==1 and j==m-1)) {
-                mov++;
+            int dir = (i&1)? -1:1;
+            mov++;
+            if((j==0 and dir==-1) or (dir==1 and j==m-1))
                 break;
-            }
-            if(i&1) {
-                if(l[i][j+dir])
-                    mov++,j+=dir;
-                else {
-                    mov++;
-                    break;
 
-
-                }
-            }
+            if(i&1)
+                if(l[i][j+dir]) j+=dir;
+                else break;
+            else if(r[i][j+dir]) j+=dir;
+            else break;
 
         }
-
-
-//        ans = dp();
-
     }
-    int main() {
-        cin.tie(nullptr)->sync_with_stdio(false);
-        int t=1;
-        cin>>t;
-        while(t--)
-            solve();
-    }
+}
+
+int main() {
+    cin.tie(nullptr)->sync_with_stdio(false);
+    int t=1;
+//    cin>>t;
+    while(t--)
+        solve();
+}
