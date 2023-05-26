@@ -35,21 +35,59 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 
 typedef pair<int,int> pii;
 const int MAX = 2e5+5;
+vector<string> s;
+vector<int> C;
+int N,M;
+map<vector<int>, int> mp;
+int dp(int i, int j, int dir, int c, int cost) {
 
-void solve() {
-    ll n;
-    cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n) {
-        cin>>a[i];
+    if(i<0 or i>=N or j<0 or j>M+1) return 1e9;
+
+    c += (s[i][j]=='1');
+
+    if(c == C[i] and i==0) return cost;
+
+    if(c == C[i]) {
+        vector<int> v= {i-1,0,1, cost+j+1};
+        vector<int> v2= {i-1,M+1,-1, cost+(M+2)-(j)};
+        if(mp.count(v)==0) mp[v] = dp(i-1,0, 1, 0, cost+j+1);
+        if(mp.count(v2)==0) mp[v2] = dp(i-1,M+1, -1, 0, cost+(M+2)-(j));
+
+        return min(mp[v],mp[v2]);
     }
+    vector<int> v{i,j+dir, dir, cost+1};
+    if(mp.count(v)==0) mp[v] = dp(i,j+dir, dir, c, cost+1);
+    return mp[v];
 
 }
+
+void solve() {
+    cin>>N>>M;
+    int tot = 0;
+    f(i,N) {
+        string x;
+        cin>>x;
+        int cnt = count(all(x),'1');
+//        debb(x,cnt);
+        if(!s.size() and cnt==0)
+            continue;
+        C.pb(cnt);
+        s.pb(x);
+        tot+=cnt;
+    }
+    N = s.size();
+    if(!tot) vpr(0);
+
+
+    ll ans = dp(N-1,0,1,0,0);
+    pr(ans);
+}
+
+
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-    cin>>t;
+//    cin>>t;
     while(t--)
         solve();
 }
