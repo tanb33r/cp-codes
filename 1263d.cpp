@@ -35,48 +35,47 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 
 typedef pair<int,int> pii;
 const int MAX = 2e5+5;
-ll _gcd (ll a, ll b) {
-    return b ? _gcd (b, a % b) : a;
-}
-ll _lcm(ll a, ll b) {
-    return (a*b)/_gcd(a,b);
+
+const int N = (int)2e5 + 100;
+
+vector<int> g[N];
+char used[N];
+
+void dfs(int u) {
+    used[u] = 1;
+    for(auto v : g[u])
+        if(!used[v])
+            dfs(v);
 }
 
 void solve() {
-    int n;
-    cin >> n;
-    int a[n];
-
-    f(i, n) cin >> a[i];
-
-
-    vector<ll> vec[n + 1];
-    vector<map<int, int>> gcds(n);
-
+    ll n;
+    cin>>n;
+    ll a[n];
     f(i,n) {
-        gcds[i][a[i]] = 1;
-        if(!i) continue;
-        for(auto x : gcds[i-1]) {
-            ll gc = __gcd(x.F,a[i]);
-            gcds[i][gc] = max(gcds[i][gc], x.S+1);
+        string s;
+        cin>>s;
+        for(char c : s) {
+            g[i].pb(n+c-'a');
+            g[n+c-'a'].pb(i);
         }
     }
 
-    vector<int> ans(n);
+    int ans = 0;
+    for(int i = n; i<n+26; i++) {
+        if(!g[i].empty() and !used[i]) {
+            dfs(i);
+            ans++;
+        }
+    }
 
-    f(i, n)
-    for(auto x : gcds[i])
-        ans[x.S-1] = max(ans[x.S-1], x.F);
+    pr(ans);
 
-    f(i, n)
-    cout<<ans[i]<<' ';
-    cout<<'\n';
 }
-
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-    cin>>t;
+//    cin>>t;
     while(t--)
         solve();
 }

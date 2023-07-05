@@ -4,6 +4,15 @@ int n,e;
 
 vector <int> graph[1000];
 int vis[1000];
+
+DFS(int u) {
+    used[u] = 1;
+    for(auto v:g[u])
+        if(!used[v])
+            dfs(v);
+}
+
+
 void dfs(int source) {
     int v;
     cout<<source<<" ";

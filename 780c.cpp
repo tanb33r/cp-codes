@@ -35,48 +35,46 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 
 typedef pair<int,int> pii;
 const int MAX = 2e5+5;
-ll _gcd (ll a, ll b) {
-    return b ? _gcd (b, a % b) : a;
+
+int n,a,b,i,m[MAX];
+vector<int> v[MAX];
+set<int> s;
+void dfs(int x, int y, int z) {
+    s.insert(y);
+    m[x] = y;
+    int a=1;
+    for (auto j : v[x]) {
+        while(a==y or a==z) a++;
+        if(m[j]==0) dfs(j,a++,y);
+    }
 }
-ll _lcm(ll a, ll b) {
-    return (a*b)/_gcd(a,b);
-}
+
 
 void solve() {
-    int n;
-    cin >> n;
-    int a[n];
+    cin>>n;
 
-    f(i, n) cin >> a[i];
+    while(i<n-1) {
+        cin>>a>>b;
+        v[a].push_back(b);
+        v[b].push_back(a);
+        i++;
+    }
+    i=0;
 
+    dfs(1,1,0);
 
-    vector<ll> vec[n + 1];
-    vector<map<int, int>> gcds(n);
+    cout<<s.size()<<endl;;
 
-    f(i,n) {
-        gcds[i][a[i]] = 1;
-        if(!i) continue;
-        for(auto x : gcds[i-1]) {
-            ll gc = __gcd(x.F,a[i]);
-            gcds[i][gc] = max(gcds[i][gc], x.S+1);
-        }
+    while(i<n) {
+        cout<<m[i+1]<<" ";
+        i++;
     }
 
-    vector<int> ans(n);
-
-    f(i, n)
-    for(auto x : gcds[i])
-        ans[x.S-1] = max(ans[x.S-1], x.F);
-
-    f(i, n)
-    cout<<ans[i]<<' ';
-    cout<<'\n';
 }
-
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-    cin>>t;
+//    cin>>t;
     while(t--)
         solve();
 }

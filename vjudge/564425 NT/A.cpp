@@ -34,49 +34,69 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 }
 
 typedef pair<int,int> pii;
-const int MAX = 2e5+5;
-ll _gcd (ll a, ll b) {
-    return b ? _gcd (b, a % b) : a;
+const int maxX = 1e6+1;
+
+ll ans;
+int N, dp[maxX];
+
+bool b[maxX];
+vector<ll> primes;
+
+void sieve() {
+    fill(b+2, b+maxX, 1);
+    for(int i = 2; i*i < maxX; i++)
+        if(b[i])
+            for(int j = i*i; j < maxX; j += i)
+                b[j] = 0;
+    for(int i = 2; i < maxX; i++)
+        if(b[i])
+            primes.push_back(i);
 }
-ll _lcm(ll a, ll b) {
-    return (a*b)/_gcd(a,b);
-}
 
-void solve() {
-    int n;
-    cin >> n;
-    int a[n];
-
-    f(i, n) cin >> a[i];
-
-
-    vector<ll> vec[n + 1];
-    vector<map<int, int>> gcds(n);
-
-    f(i,n) {
-        gcds[i][a[i]] = 1;
-        if(!i) continue;
-        for(auto x : gcds[i-1]) {
-            ll gc = __gcd(x.F,a[i]);
-            gcds[i][gc] = max(gcds[i][gc], x.S+1);
+void calc(int x) {
+    vector<int> pf;
+    for(int p : primes) {
+        if(1==x) break;
+        if(b[x]) {
+            pf.pb(x);
+            break;
         }
+
+        if(x%p) continue;
+        pf.pb(p);
+        while(x % p == 0)
+            x /= p;
     }
 
-    vector<int> ans(n);
+    // inclu exclu
 
-    f(i, n)
-    for(auto x : gcds[i])
-        ans[x.S-1] = max(ans[x.S-1], x.F);
+    int C = pf.size();
 
-    f(i, n)
-    cout<<ans[i]<<' ';
-    cout<<'\n';
+    for(int mask = 0 ; mask<(1<<C); mask++) {
+        int val = 1;
+        for(int i = 0 ; i<C; i++)
+            if(mask&(1<<i))
+                val*= pf[i];
+
+        int k = __builtin_popcount(mask);
+        ans += k&1? -dp[val] : dp[val];
+        dp[val]++;
+    }
 }
 
+
+void solve() {
+    ll n;
+    cin>>n;
+    f(i,n) calc(II);
+    pr(ans);
+
+}
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
+    sieve();
     int t=1;
-    cin>>t;
+//    cin>>t;
     while(t--)
         solve();
 }

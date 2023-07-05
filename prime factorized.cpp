@@ -16,3 +16,4 @@ void solve() {
         }
     }
     if (n > 1) v.pb({n,1});
+}
