@@ -35,36 +35,78 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 }
 const int mod = 1e9+7;
 const int N = 1e5+7;
+vector<int> v;
 
 void solve() {
+    v.clear();
+    vector<int> v2;
     ll n;
     cin>>n;
-    int a[n];
-    bool ok  =0 ;
-
-//    ll ans=0;
-    int mx = -1;
-    int mxx = -1;
-    int mn = -1;
-    vector<pii> v;
-
+    ll a[n];
+    bool p = 0;
     f(i,n) {
         cin>>a[i];
-        if(a[i]==2) v.pb({a[i],i+1});
-        if(a[i]==1) v.pb({a[i],i+1});
-        if(a[i]==n) v.pb({a[i],i+1});
+        p |= a[i]>0;
     }
-//    debb(v[1].F);
-    if(v[1].F==n)
-        cout<<"1 1\n";
-    else if(v[2].F==n) {
-        cout<<v[2].S<<' '<<v[1].S<<'\n';
-    } else if(v[0].F==n) {
-        cout<<v[0].S<<' '<<v[1].S<<'\n';
+    if(!p) {
+        ll ans = *max_element(a,a+n);
+        pr(ans);
+        return;
     }
 
+//    vector<pii> pr;
+//    int i = 0;
+//    while(i<n and a[i]<=0) i++;
+//    while(a[n-1]<=0 and n>0) n--;
+//    int k = i;
+//    while(i<n) {
+//        if(a[i]<=0) {
+//            int l = i;
+//            while(i<n and a[i]<=0) {
+//                i++;
+//            }
+//            int r = i-1;
+//            pr.pb({l,r});
+//        } else i++;
+//    }
+
+//    for(auto x : pr) cout<<x.F<<' ' <<x.S<<'\n';
+//    pr.pb({-1,-1});
+//    int I = 0 ;
+//    i = k;
+//    while(i<n) {
+////            debb(i,n);
+//        if(i == pr[I].F) {
+//
+//            if((pr[I].S - pr[I].F)%2==0) {
+//                ll y = a[pr[I].S+1];
+//                v2.back()+=y;
+//                i=pr[I].S+2;
+//            }
+//
+//            else if( (pr[I].S - pr[I].F)%2==1) {
+////                    v2.pb(a[pr[I].F]);
+//                i = pr[I].S+1;
+//            }
+//            I++;
+//        } else {
+//            v2.pb(a[i]);
+//            i++;
+//        }
+//    }
+//    vout(v2);
+
+
+
+    ll ans1 = 0,ans2 = 0;
+    f(i,n) {
+        if(a[i]>=0) i&1 ? ans1+=a[i]: ans2+=a[i];
+    }
+    ll ans = max(ans1,ans2);
+    pr(ans);
 
 }
+
 
 int main() {
     ios::sync_with_stdio(0),cin.tie(0);
@@ -73,3 +115,7 @@ int main() {
     while(t--)
         solve();
 }
+// 1 8 2 -1 -3 -6 -9 -1 -3 4
+// 1 5 5 2 -1 -3  4
+// 1 5 1 -1 -1 -1 1
+
