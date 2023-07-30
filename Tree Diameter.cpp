@@ -22,21 +22,44 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 
 typedef pair<int,int> pii;
 const int MAX = 2e5+5;
+vector<int> graph[MAX];
+int f1, ans[MAX], maxd;
+
+void dfs(int u, int p, int d = 0) {
+    ans[u] = max(ans[u],d);
+
+    if(d>=maxd) maxd = d, f1 = u;
+    for(auto v:graph[u])
+        if(v!=p)
+            dfs(v,u,d+1);
+}
+
 
 void solve() {
     ll n;
     cin>>n;
-    ll a[n];
-    ll ans = 0;
-    f(i,n) {
-        cin>>a[i];
+    f(i,n-1) {
+        int x,y;
+        cin>>x>>y;
+        graph[x].push_back(y);
+        graph[y].push_back(x);
     }
+    dfs(1,1);
+    int f2 = f1;
+    maxd = 0;
+    dfs(f2,f2);
+    maxd = 0;
+    dfs(f1,f1);
+//    for(int i =1 ; i<=n; i++)
+//        cout<<ans[i]<<' ';
 
+    cout<<maxd<<'\n';
 }
+
 int main() {
     cin.tie(nullptr)->sync_with_stdio(false);
     int t=1;
-    cin>>t;
+//    cin>>t;
     while(t--)
         solve();
 }

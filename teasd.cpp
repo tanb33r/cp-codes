@@ -73,3 +73,5 @@ int main()
     }
     return 0;
 }
+
+gcc -o Compare_Performance Compare_Performance.c Compare_Performance.h -I
