@@ -1,25 +1,19 @@
-#include<bits/stdc++.h>
-#define Fast ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-#define ll long long
+#include <bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+#define mp make_pair
+#define Mod 1000000007
+#define MAXSIEVE 10000007
+#define M_PI 3.14159265358979323846
 using namespace std;
 
-int main() {
-    Fast;
-    int t;
-    cin>>t;
 
-//    freopen("output.txt", "r", stdin);
-//    freopen("hack.txt", "w", stdout);
-    while(t--) {
-        long long n,ans=0LL;
-        cin>>n;
-        n=n/2;
-        long long x=1LL,y=8;
-        while(n--) {
-            ans=ans+(y*x*x);
-            x++;
-        }
-        cout<<ans<<"\n";
-    }
+int main(){
 
+    int v, s;
+    cin >> v >> s;
+    double r = s/(2*sin(M_PI/v));
+    double a = M_PI*r*r;
+    cout << setprecision(9) << a << endl;
+    return 0;
 }

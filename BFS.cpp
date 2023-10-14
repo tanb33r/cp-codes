@@ -31,10 +31,10 @@ queue <int> q;
 void init() {
     f(i,220) {
         dis[i] = 0;
-        v[i].clear();
-        }
-
+        veca[i].clear();
     }
+
+}
 
 void BFS() {
     while (!q.empty()) {
@@ -46,12 +46,12 @@ void BFS() {
                 par[t]=u;
                 dis[t]=dis[u]+1;
                 q.push(t);
-                }
             }
+        }
         col[u]=2;
         q.pop();
-        }
     }
+}
 
 int main() {
     cin >>  e;
@@ -62,11 +62,12 @@ int main() {
         veca[b].push_back(a);
         m[a]++;
         m[b]++;
-        }
+    }
     cout << "input search value: ";
-    in(k);
-    in(y);
-//    y++;
+    int k, y;
+    cin >> k >> y;
+//   node k theke y distance e koyda ase ber kore
+
 
     col[k]=1;
     dis[k]=0;
@@ -78,16 +79,15 @@ int main() {
     int c =0;
     f(i,e) {
         cout<<dis[i]<<" ";
-        }
+    }
 
     f(i,mx) {
         if(dis[i])
             cout <<dis[i]<<" "<<i<<endl;
         if(dis[i] > y)     c++;
-        }
-    cout<<"\n"<<c<<endl;
-    cout<<"\n"<<m.size()<<endl;
     }
+    cout<<"\n"<<c<<endl;
+}
 
 /*
 

@@ -3,6 +3,6 @@ using namespace std;
 int main()
 {
     int n,t;
-    while(cin>>n>>t)
-		printf("%d\n",2*n*t);
+    while(cin>>n, n>0)
+    cout<<n*2<<endl;
 }

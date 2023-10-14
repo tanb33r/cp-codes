@@ -12,7 +12,7 @@ int main() {
     ios::sync_with_stdio(0),cin.tie(0),cout.tie(0);
     cin >> tc;
     while(tc--) {
-        cin >> s >> t;asd
+        cin >> s >> t;
         for(int i = 0; i < s.size() + 5; ++i)
             for(int j = 0; j < 26; ++j)
                 nxt[i][j] = INF;

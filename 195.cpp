@@ -19,7 +19,6 @@ int main() {
 		while(next_permutation(word,word+strlen(word))){
 			cout << word << endl;
 		}
-
 	}
 
 	return 0;

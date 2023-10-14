@@ -32,11 +32,10 @@ vector<int> v[N];
 vector<int> perm, pos;
 void dfs(int x) {
     if(vis[x]) return;
-    vis[x]=1;
-    pos.pb(x);
-    perm.pb(a[x]);
-    for(auto to : v[x]) dfs(to);
-
+    vis[x] = 1;
+    pos.push_back(x);
+    perm.push_back(a[x]);
+    for (auto to : v[x]) dfs(to);
 }
 void solve() {
     int n,m;

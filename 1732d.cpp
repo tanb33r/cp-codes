@@ -9,19 +9,23 @@ using namespace std;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 
-#define  deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
-#define  hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
-#define  ll                 long long
-#define  II                 ({ll t;cin>>t;t;})
-#define  cbit(n,p)          ((n)&(1LL<<(p)))
-#define  sbit(n,p)          ((n)|(1LL<<(p)))
-#define  tbit(n,p)          ((n)^(1LL<<(p)))
 #define ll long long
-#define  cerr               if(0)cerr
-//#define ordered_set tree<ll, null_type,less<ll>, rb_tree_tag,tree_order_statistics_node_update>
-//ordered_set o_set;
-map<ll,ll> m,mp;
-
+#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
+ordered_set o_set;
+ll bs(ll x) {
+    ll l = 0;
+    ll r = 1e18+2;
+    while(l<r) {
+        ll mid = l + (r - l) / 2;
+        ll ret = o_set.order_of_key(mid);
+        if( (mid - ret - 1) < x) {
+            l = mid + 1;
+        } else if( (mid - ret - 1) >= x) {
+            r = mid;
+        }
+    }
+    return r;
+}
 void solve() {
 
 
@@ -31,25 +35,56 @@ void solve() {
         char c;
         ll x;
         cin>>c>>x;
-        if(c=='+') m[x]++;
+        x--;
+        if(c=='+')
+            o_set.insert(x);
         else {
-            ll multi = x,ans;
-            if(mp[x]) multi=mp[x];
-            ll j=multi;
-            while(m.find(j)!=m.end()) {
-                j+=x;
-            }
-            ans=j;
-            mp[x] = ans;
-            cout<<(ans)<<'\n';
+
+
+            cout <<  bs(x) <<endl;
         }
     }
+    // insert function to insert in
+    // ordered set same as SET STL
+    o_set.insert(1);
+    o_set.insert(2);
+
+    // Finding the second smallest element
+    // in the set using * because
+    // find_by_order returns an iterator
+    cout << *(o_set.find_by_order(1)) // K-th element in a set (counting from zero).
+         << endl;
+
+    // Finding the number of elements
+    // strictly less than k=4
+    cout << o_set.order_of_key(4) //  Number of items strictly smaller than k .
+         << endl;
+
+    // Finding the count of elements less
+    // than or equal to 4 i.e. strictly less
+    // than 5 if integers are present
+    cout << o_set.order_of_key(5)
+         << endl;
+
+    // Deleting 2 from the set if it exists
+    if (o_set.find(2) != o_set.end())
+        o_set.erase(o_set.find(2));
+
+    // Now after deleting 2 from the set
+    // Finding the second smallest element in the set
+    cout << *(o_set.find_by_order(1))
+         << endl;
+
+    // Finding the number of
+    // elements strictly less than k=4
+    cout << o_set.order_of_key(4)
+         << endl;
+
+//    return 0;
 }
-
+// Driver program to test above functions
 int main() {
-    ios_base::sync_with_stdio(0);
-    cin.tie(NULL);
-
     solve();
+    // Ordered set declared with name o_set
 
 }

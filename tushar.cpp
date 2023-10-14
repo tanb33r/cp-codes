@@ -1,22 +1,31 @@
-#include<stdio.h>
-void magicMultiply(int *ptr, int len) {
-    int i, j, fact;
-    for (i=len; i>=0; i--) {
-        fact=1;
-        for (j=1; j<=ptr[i]; j++) {
-            fact*=j;
-        }
-        ptr[i] = fact;
-    }
-}
+#include <bits/stdc++.h>
+
+using namespace std;
 int main() {
-    int *p ;
-    for(int i=0; i<5; i++) {
-        printf("Enter value at index %d: ", i);
-        scanf("%d", (p+i));
+    long long n;
+    cin>>n;
+    long long a[n];
+    for(int i = 0; i<n ; i++) {
+        cin>>a[i];
     }
-    magicMultiply(p,5);
-    for (int i=0; i<5; i++) {
-        printf("%d ", p[i]);
+    long long x;
+    cin>>x;
+
+    long long ans = 0,i = 0, j = 1;
+    long long sum = a[0];
+    while(j<n) {
+        if(sum==x) {
+            ans = max(ans,j-i);
+            sum+=a[j];
+            j++;
+        } else if(sum<x) {
+            sum+=a[j];
+            j++;
+        } else {
+            sum-=a[i];
+            i++;
+        }
+
     }
+    cout<<ans<<"\n";
 }

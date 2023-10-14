@@ -1,18 +1,38 @@
-#include<bits/stdc++.h>
-using namespace std;
-int main()
+#include <stdio.h>
 
-{
-    int c,i;
-    string s;
-    cin>>c;
-    for(i=0; i<c; i++)
-    {
-        cin>>s;
-        int len = s.size();
+int main() {
+  FILE *inputFile, *outputFile;
+  char ch;
+  int inComment = 0;
 
-        if(len < 11) cout<<s<<endl;
-        else cout<<s[0]<<len-2<<s[len-1]<<endl;
+  inputFile = fopen("input.txt", "r");
+  outputFile = fopen("output.txt", "w");
+
+  if (inputFile == NULL || outputFile == NULL) {
+    printf("Error opening files.\n");
+    return 1;
+  }
+
+  while ((ch = fgetc(inputFile)) != EOF) {
+    if (inComment == 0) {
+      if (ch == '/' && fgetc(inputFile) == '*') {
+        inComment = 1;
+      } else if (ch == '/' && fgetc(inputFile) == '/') {
+        while ((ch = fgetc(inputFile)) != '\n') {
+          // Skip the single-line comment
+        }
+      } else {
+        fputc(ch, outputFile);
+      }
+    } else {
+      if (ch == '*' && fgetc(inputFile) == '/') {
+        inComment = 0;
+      }
     }
-    return 0;
+  }
+
+  fclose(inputFile);
+  fclose(outputFile);
+
+  return 0;
 }

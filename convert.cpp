@@ -1,0 +1,17 @@
+\xE9  é
+\xE7  ç
+\xE8  è
+\xEA  ê
+\xE0  à
+\xEE  î
+\xE2  â
+\xC9  É
+\xC0  À
+\xFB  û
+\xF4  ô
+\xCA  Ê
+\xC8  È
+\xF9  ù
+\xD4  Ô
+\xDB  Û
+

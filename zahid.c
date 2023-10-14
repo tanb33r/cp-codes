@@ -1,28 +1,19 @@
 #include <stdio.h>
-#include <string.h>
-
-char MOC(char c[],int n) {
-    int count[125];
-    int i=0;
-    for(i=0; i<125; i++) {
-        count[i]=0;
-    }
-    for(i=0; i<n; i++) {
-        count[c[i]]++;
-    }
-    int m = 0;
-    char ans;
-    for(i=0; i<n; i++) {
-        if(m<count[c[i]]) {
-            m=count[c[i]],ans=c[i];
-        }
-    }
-    return ans;
-
-}
 int main() {
-    char c[1000];
-    scanf("%s",c);
+    int n;
 
-    printf("%c\n",MOC(c,strlen(c)));
+    scanf("%d",&n);
+    double arr[n];
+    double min = 1000000;
+    double max = 0;
+    for(int i = 0; i<n; i++) {
+        scanf("%lf",&arr[i]);
+    }
+    for(int i = 0; i<n; i++) {
+        if(arr[i]<min)
+            min = arr[i];
+        if(arr[i]>max)
+        max = arr[i];
+    }
+    printf("%lf %lf\n",max,min);
 }

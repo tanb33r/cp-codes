@@ -5,33 +5,44 @@
 #define  pb(x)              push_back(x);
 #define  in(x)              int x; cin>>x
 #define  lin(x)             ll x; cin>>x
-#define  d(x)               cout<<x<<"\n"
+#define  pr(x)               cout<<x<<"\n"
+#define  ps(x)               cerr<<(#x)<<"\n"
 #define  endl               "\n"
 #define  newl               cout<<"\n"
 #define  all(v)             (v).begin(), (v).end()
 #define  vi                 vector<int>
 #define  vprint(v)          for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<endl
-#define  deb(x)             cerr<<"\n"<<(#x)<<" is "<<(x)<<endl
+#define  deb(x)             cerr<<"\n"<<(#x)<<" is "<<x<<endl
+#define  ll long long
 //#define  cerr               if(0)cerr
+
+
 const ll maxn = 2e5 + 100;
 
 ll q, n, a[maxn], b[maxn];
 
 using namespace std;
 typedef pair<int,int> pii;
-typedef  long long          ll;
 
 
 bool bin(ll x) {
     ll c = 0;
-    f(i,n) c += (x-1-a[i] <= c and c<=b[i]);
+    for(ll i = 0; i < n; i++) c+=(x-1-a[i]<= c and c <= b[i]);
     return c>=x;
 }
 void solve() {
-    in(n);
-    int a[n];
+
+    cin>>n;
     f(i,n)
-    cin>>a[i];
+    cin>>a[i]>>b[i];
+    ll l = -1, r = n+1, mid;
+    while(r-l>1) {
+        mid = (l+r)>>1;
+        if(bin(mid)) l = mid;
+        else r = mid;
+//        deb(l<<" "<<r);
+    }
+    pr(l);
 }
 
 

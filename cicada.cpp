@@ -9,52 +9,40 @@
 typedef long long ll;
 using namespace std;
 
-ll gcd(ll a, ll b)
-{
+ll gcd(ll a, ll b) {
     if (a == 0)
         return b;
     return gcd(b % a, a);
 }
 
-ll lcm(ll a, ll b)
-{
+ll lcm(ll a, ll b) {
     return (a*b)/gcd(a, b);
 }
 
 
-int main()
-{
+int main() {
 
     in(t)
-    f(i,t)
-    {
+    f(i,t) {
+        int day,m;
+        cin>>day>>m;
+        vector<int> pred(m);
 
-        in(day);
-        in(m);
-        vector<int> num(m);
-
-        f(j,m)
-        cin>>num[j];
+        f(j,m) cin>>pred[j];
 
         ll res = 0;
         int n = m;
-        for(int i = 1; i<(1<<n); i++)
-        {
+        for(int i = 1; i<(1<<n); i++) {
             int ic = i ;
             ll d = 1, cnt = 0, bit = 0;
-            while(ic != 0)
-            {
-                if(ic&1)
-                    d=lcm(d,num[bit]),cnt++;
-//                    d*=num[bit],cnt++;
+            while(ic != 0) {
+                if(ic&1) d=lcm(d,pred[bit]),cnt++;
+//                    d*=pred[bit],cnt++;
                 bit++;
-                ic/=2;
+                ic>>=1;
             }
 
-            if(cnt&1)
-                res += (day/d);
-            else
-                res -= (day/d);
+            res += (cnt&1)?(day/d): -(day/d);
         }
         cout<<"Case "<<i+1<<": "<<day-res<<"\n";
     }

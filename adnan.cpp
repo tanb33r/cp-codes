@@ -1,59 +1,42 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
+#define  f(i,n)             for(int i=0; i<(n); i++)
+#define  ff(i,j,n)          for(int i=int(j);i<int(n);++i)
+#define  fr(i,n)            for(int i=int(n);~i;--i)
+#define  ps(x)              cout<<#x<<"\n"
+#define  pb(x)              push_back(x)
+#define  eb(x)              emplace_back(x)
+#define  pr(x)              cout<<x<<"\n"
+#define  endl               "\n"
+#define  newl               cout<<"\n"
+#define  all(v)             (v).begin(), (v).end()
+#define  vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
+#define  arrp(v,n)          for(int I=0;I<n;I++)cout<<v[I]<<" ";cout<<"\n"
+#define  F                  first
+#define  S                  second
+#define  deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
+#define  hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
+#define  ll                 long long
+#define  II                 ({ ll TEMP; cin>>TEMP; TEMP; })
+//#define  cerr               if(0)cerr
 using namespace std;
-bool x[5000][5000];
-int main()
-{
-    int n,no_of_degree,loop,sum_of_degree=0,c=0,no_of_edge=0;
-    scanf("%d",&n);
-    srand(time(NULL));
-    for(int i=0; i<n; i++)
-    {
-        for(int j=i; j<n; j++)
-        {
-            x[i][j]=rand()%2;
-            x[j][i]=x[i][j];
-        }
-    }
-    clock_t time_start, time_stop;
-    time_start = clock();
-    for(int i=0; i<n; i++)
-    {
-        loop=0;
-        no_of_degree=0;
-        cout<<"Vertex "<<i<<"\t";
-        for(int j=0; j<n; j++)
-        {
-            if(x[i][j])
-            {
-                no_of_edge++;
-                no_of_degree++;
-            }
-            cout<<x[i][j]<<"  ";
-        }
-        if(x[i][i])  //check loops in graph
-        {
-            loop=1;
-            c++;
-        }
-        sum_of_degree+=no_of_degree+loop;
-        cout<<"   Number of degree "<<no_of_degree+loop<<endl;
-    }
-    cout<<"\nSummation of degree of all vertex "<<sum_of_degree<<endl;
-    no_of_edge-=c;
-    no_of_edge=no_of_edge/2;
-    no_of_edge+=c;
+int main() {
 
-    cout<<"\nNumber of edge "<<no_of_edge<<endl;
-    if(sum_of_degree==2*(no_of_edge))
-    {
-        cout<<"Handshaking theorem holds for this graph"<<endl;
+    int n=5 ;
+//    cin>>n;
+    int a[n]={2,5,7,9,11};
+//    f(i,n) cin>>a[i];
+    int check[100000] {0};
+
+    f(i,n) {
+        for(int j = 2; j<sqrt(a[i]); j++) {
+            if(a[i]%j==0)check[j]++;
+        }
     }
-    else
-    {
-        cout<<"Handshaking theorem does not holds for this graph"<<endl;
-    }
-    time_stop=clock();
-    double time=(double)(time_stop-time_start)/CLOCKS_PER_SEC;
-    printf("\nTime -> %lfs\n",time);
-    return 0;
+    for(int i = 2; i<100000; i++) {
+        if(check[i]>1) {
+            ps(no);
+            return 0 ;
+        }
+
+    }  ps(yes);
 }

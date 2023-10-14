@@ -1,6 +1,7 @@
 //cf 20C
 
-#include <bits/stdc++.h>
+
+include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
 int n,m,i,j,a,b,w,k,z;
@@ -18,8 +19,8 @@ int main () {
         cin>>a>>b>>w;
         v[a].push_back(b);
         v[b].push_back(a);
-        mp[ {a,b}]=w;
-        mp[ {b,a}]=w;
+        mp[{a,b}]=w;
+        mp[{b,a}]=w;
     }
 
     for (i=2; i<=n; i++) d[i]=1e18;
@@ -35,10 +36,7 @@ int main () {
         }
     }
 
-    if (d[n]==1e18) {
-        cout<<-1;
-        return 0;
-    }
+    if (d[n]==1e18) return cout<<-1,0;
     dij(n);
     return 0;
 }

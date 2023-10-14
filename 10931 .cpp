@@ -12,7 +12,7 @@ int main()
         x=n;
         while(x)
         {
-            if(x%2)
+            if(x&1)
                 s+="1",c++;
             else
                 s+="0";

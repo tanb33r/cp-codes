@@ -1,3 +1,4 @@
-0     asdasdz
-1
-0 
+/This is a single-line comment\n
+not a comment
+"\n
+"int main() { return 0; }

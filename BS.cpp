@@ -6,20 +6,29 @@ typedef long long Long;
 
 using namespace std;
 
-int BS(int lo, int hi, Long x,int a[])
-{
-    if (hi < lo )
-        return 0;
-    int mid = lo +(hi-lo)/2 ;
-    if (a[mid] > x)
-        return BS(lo, mid-1, x, a);
 
-    else if ( a[mid] < x )
-        return BS(mid+1, hi, x, a);
+    while(r - l > 1){
+        int m = (l + r) / 2;
+        if(check(m, x, a))
+            l = m;
+        else r = m;
+    }
 
-    else
-        return 1 + BS(lo, mid-1, x, a) + BS(mid+1, hi, x, a);
-}
+
+//int BS(int lo, int hi, Long x,int a[])
+//{
+//    if (hi < lo )
+//        return 0;
+//    int mid = lo +(hi-lo)/2 ;
+//    if (a[mid] > x)
+//        return BS(lo, mid-1, x, a);
+//
+//    else if ( a[mid] < x )
+//        return BS(mid+1, hi, x, a);
+//
+//    else
+//        return 1 + BS(lo, mid-1, x, a) + BS(mid+1, hi, x, a);
+//}
 
 int main()
 {

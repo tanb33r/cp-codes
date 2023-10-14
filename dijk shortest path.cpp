@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#define infinity 1e9
+#define infinity 1<<30  //2^30
 using namespace std;
 struct node {
     int u;
@@ -15,18 +15,22 @@ struct node {
 void dijstkra(int n, vector<int>g[], vector<int>cost[], int source) {
 
     int distance[n+1];
-    for(int i=1; i<=n; i++)
+    for(int i=1; i<=n; i++) {
         distance[i] = infinity;
+    }
 
     priority_queue<node>q;
     q.push(node(source,0));
     distance[source] = 0;
+
     while(!q.empty()) {
         node top = q.top();
         q.pop();
         int u=top.u;
+
         for(int i=0; i<(int)g[u].size(); i++) {
             int v=g[u][i];
+
             if(distance[u] + cost[u][i] < distance[v]) {
                 distance[v] = distance[u] + cost[u][i];
                 q.push(node(v, distance[v]));
@@ -49,8 +53,9 @@ int main() {
         cost[u].push_back(w);
         cost[v].push_back(w);
     }
-    for(int i=0; i<numNodes; i++)
-        dijstkra(numNodes, g, cost, i);
+    int source;
+    cin>>source;
+    dijstkra(numNodes, g, cost, source);
 
     return 0;
 }

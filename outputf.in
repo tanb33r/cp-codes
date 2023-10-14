@@ -1,0 +1,67 @@
+Add-Type -AssemblyName System.Windows.Forms
+Start-Sleep -Seconds 3
+$delayInSeconds = 0.5
+$lines = @(
+"import pandas as pd",
+"import re",
+"from collections import Counter",
+"",
+"# Read CSV files",
+"email_df = pd.read_csv&&*email_addresses.csv*!!  # Replace with your file path",
+"data_df = pd.read_csv&&*name_domain_data.csv*!!  # Replace with your file path",
+"",
+"def deduce_email_format&&email_df, possible_separators!!:",
+"    separators = Counter&&!!",
+"",
+"    for email in email_df[*email*]:",
+"        parts = email.split&&*@*!!",
+"        if len&&parts!! == 2:",
+"            local_part, _ = parts",
+"",
+"            for separator in possible_separators:",
+"                if separator in local_part:",
+"                    separators[separator] += 1",
+"                    break",
+"",
+"    most_common_separator = separators.most_common&&1!![0][0]",
+"    return most_common_separator",
+"",
+"def generate_email_addresses&&data_df, separator, domain!!:",
+"    emails = []",
+"",
+"    for _, row in data_df.iterrows&&!!:",
+"        first_name = row[*first_name*].lower&&!!",
+"        last_name = row[*last_name*].lower&&!!",
+"        email = f*##first_name@@##separator@@##last_name@@@##domain@@*",
+"        emails.append&&email!!",
+"",
+"    return emails",
+"",
+"# Define possible separators",
+"possible_separators = [*.*, *_*, *-*, **]",
+"",
+"# Deduce the most likely separator from the first table",
+"most_common_separator = deduce_email_format&&email_df, possible_separators!!",
+"",
+"# Assuming a single domain for all records in the second table",
+"domain = data_df.loc[0, *domain*]",
+"",
+"# Generate email addresses using the deduced separator and format from the first table",
+"generated_emails = generate_email_addresses&&data_df, most_common_separator, domain!!",
+"",
+"# Print the generated email addresses",
+"print&&generated_emails!!",
+"")
+[System.Windows.Forms.SendKeys]::SendWait("+")
+Start-Sleep -Seconds $delayInSeconds
+
+foreach ($line in $lines) {
+    foreach ($char in $line.ToCharArray()) {
+        $escapedChar = if ($char -match '(["`$%+{}])') { "$char" } else { $char }
+        [System.Windows.Forms.SendKeys]::SendWait("$escapedChar")
+        Start-Sleep -Seconds $delayInSeconds
+    }
+
+    [System.Windows.Forms.SendKeys]::SendWait("{ENTER}")
+    Start-Sleep -Seconds $delayInSeconds
+}

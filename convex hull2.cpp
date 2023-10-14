@@ -66,7 +66,7 @@ void convexHull(Point points[], int n) {
                 q = i;
         p = q;
 
-    } while (p != l);
+    } while (p != l); /
     for (int i = 0; i < hull.size(); i++)
         cout << "(" << hull[i].x << ", "
              << hull[i].y << ")\n";

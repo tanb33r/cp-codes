@@ -1,0 +1,7 @@
+// This is a single-line comment\n
+not a comment
+"/* This is a
+
+
+ multi-line comment */\n
+"int main() { return 0; }

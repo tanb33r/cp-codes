@@ -39,38 +39,35 @@ ll dp(int i,int j) {
     }
     return mem[i][j];
 }
-
-
 void solve() {
     memset(mem,-1,sizeof mem);
     cin>>n>>m;
 
     f(i,n) {
         ll k=II;
-        vl t,pref(k),suff(k);
-        f(ii,k)t.pb(II);
+        vector<ll> t,pref(k),suff(k);
+        f(i,k)t.pb(II);
         a.pb(t);
         pref[0]=t[0];
         suff[k-1]=t[k-1];
         ff(i1,1,k)      pref[i1]=pref[i1-1]+t[i1];
         fr(i1,k-1,0)    suff[i1]=suff[i1+1]+t[i1];
-        ff(i1,-1,k) {
-            ff(i2,i1,k+1) {
-                ll sz=i1+1+k-i2;
-                ll val=0;
-                if(i1!=-1)  val+=pref[i1];
-                if(i2!=k)   val+=suff[i2];
-                mx[sz][i]=max(mx[sz][i],val);
+        for(int i=-1; i<k; i++)
+            for(int j=i; j<k+1; j++) {
+                ll sz = i-j+1+k;
+                ll val = 0;
+                if(i!=-1) val +=pref[i];
+                if(j!=k)  val +=suff[k];
+                mx[sz][i]=max(val,mx[sz][i]);
             }
-        }
+        pr(dp(0,m));
     }
-    pr(dp(0,m));
 }
 
-int main() {
+signed main() {
     ios::sync_with_stdio(0),cin.tie(0);
     int t=1;
-//    cin>>t;
+    cin>>t;
     while(t--)
         solve();
 }

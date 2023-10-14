@@ -1,24 +1,15 @@
-#include <stdio.h>
-    int sum = 0;
+#include <bits/stdc++.h>
+using namespace std;
 
-int fibo(int x)
-{
-int p=5;
-    if(x==1)
-        return 0;
-    if(x==2)
-        return 1;
-    else
-            sum+=(fibo(x-1));
-
+int main() {
+    long long   ans,n,k,a;
+    cin>>n>>k>>a;
+    ans = (n*k)/a;
+    double d;
+    d = ((double)n*k)/a;
+    int intd = d;
+    double asd = d - intd;
+    if(asd>0) cout<<"double\n";
+    else if(ans > 2147483647 ) cout<<"long long\n";
+    else cout<<"int\n";
 }
-//int main()
-//{
-//    int n=6,i,j,c=0;
-//        printf("dsa ");
-//
-//    fibo(5);
-//
-//
-//        printf("dsa %d",sum);
-//}

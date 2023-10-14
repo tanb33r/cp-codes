@@ -1,76 +1,52 @@
-// A C++ dynamic programming
-// solution for longest palindrome
-
-#include <bits/stdc++.h>
+l#include <bits/stdc++.h>
 using namespace std;
 
-void printSubStr(
-    string str, int low, int high) {
-    for (int i = low; i <= high; ++i)
-        cout << str[i];
+string lcs(string a, string b) {
+    int m = a.size()+1;
+    int n = b.size()+1;
+    int l[m][n];
+    string s ;
+    for(int i = 0; i<m; i++)
+        for(int j = 0; j<n; j++)
+            if(i == 0 || j == 0)
+                l[i][j] = 0;
+            else if(a[i-1] == b[j-1])
+                l[i][j] = l[i-1][j-1]+1;
+            else
+                l[i][j] = max(l[i-1][j],l[i][j-1]);
+
+    int i = m-1, j = n-1;
+    while (i > 0 && j > 0) {
+        if (a[i-1] == b[j-1]) {
+            s += a[i-1];
+            i--;
+            j--;
+        } else if (l[i-1][j] > l[i][j-1])
+            i--;
+        else
+            j--;
+    }
+    cout<<" ";
+    for(int i = 0; i<b.size(); i++) {
+        cout<<" "<<b[i] ;
+    }
+    cout<<endl;
+    for(int i = 0; i<m; i++) {
+        for(int j = 0; j<n; j++)
+            cout<<l[i][j]<<" ";
+        cout<<endl;
+    }
+    return s;
+
 }
 
-int longestPalSubstr(string str) {
-    int n = str.size();
 
-    // table[i][j] will be false if substring
-    // str[i..j] is not palindrome.
-    // Else table[i][j] will be true
-    bool table[n][n];
-
-    memset(table, 0, sizeof(table));
-
-    // All substrings of length 1
-    // are palindromes
-    int maxLength = 1;
-
-    for (int i = 0; i < n; ++i)
-        table[i][i] = true;
-
-    // check for sub-string of length 2.
-    int start = 0;
-    for (int i = 0; i < n - 1; ++i) {
-        if (str[i] == str[i + 1]) {
-            table[i][i + 1] = true;
-            start = i;
-            maxLength = 2;
-        }
-    }
-
-    // Check for lengths greater than 2.
-    // k is length of substring
-    for (int k = 3; k <= n; ++k) {
-        // Fix the starting index
-        for (int i = 0; i < n - k + 1; ++i) {
-            // Get the ending index of substring from
-            // starting index i and length k
-            int j = i + k - 1;
-
-            // checking for sub-string from ith index to
-            // jth index iff str[i+1] to str[j-1] is a
-            // palindrome
-            if (table[i + 1][j - 1] && str[i] == str[j]) {
-                table[i][j] = true;
-
-                if (k > maxLength) {
-                    start = i;
-                    maxLength = k;
-                }
-            }
-        }
-    }
-
-    cout << "Longest palindrome substring is: ";
-    printSubStr(str, start, start + maxLength - 1);
-
-    // return length of LPS
-    return maxLength;
-}
-
-// Driver Code
 int main() {
-    string str = "forgeeksskeegfor";
-    cout << "\nLength is: "
-         << longestPalSubstr(str);
-    return 0;
+    string a,b ;
+    b = "RAKIBUL";
+    a = "SAKIBL";
+    string x = lcs(a,b);
+    reverse(x.begin(),x.end());
+    cout<<x<<endl;
 }
+

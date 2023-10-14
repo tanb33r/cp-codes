@@ -3,7 +3,7 @@
 using namespace std;
 
 
-int Partition(int l, int r, int a[]) {
+int parti(int l, int r, int a[]) {
     int i = l;
     for (int j = l+1; j < r; j++)
         if (a[j] < a[r])
@@ -17,7 +17,7 @@ int Partition(int l, int r, int a[]) {
 */
 void quicksort( int l, int r, int a[]) {
     if(l<r) {
-        int pivot = Partition(l,r,a);
+        int pivot = parti(l,r,a);
         quicksort(l,pivot-1,a);
         quicksort(pivot + 1,r,a);
     }

@@ -13,10 +13,9 @@ int main()
         string s(x); //Disk
         for(int i =0 ; i < x.size(); i++)
             x[i]=tolower(x[i]);
-
         sort(x.begin(),x.end());
-        //diks
-        mmap[x]++; // m[diks]++ m[diks] = Disk
+
+        mmap[x]++;
         m[x] = s;
 
     }

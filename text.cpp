@@ -1,5 +1,36 @@
-Bessie the cow has just intercepted a text that Farmer John sent to Burger Queen! However, Bessie is sure that there is a secret message hidden inside.
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-The text is a string s of lowercase Latin letters. She considers a string t as hidden in string s if t exists as a subsequence of s whose indices form an arithmetic progression. For example, the string aab is hidden in string aaabb because it occurs at indices 1, 3, and 5, which form an arithmetic progression with a common difference of 2. Bessie thinks that any hidden string that occurs the most times is the secret message. Two occurrences of a subsequence of S are distinct if the sets of indices are different. Help her find the number of occurrences of the secret message!
+entity AsynchronousCounter is
+    Port ( clk : in STD_LOGIC;
+           rst : in STD_LOGIC;
+           count : out STD_LOGIC_VECTOR(3 downto 0));
+end AsynchronousCounter;
 
-    For example, in the string aaabb, a is hidden 3 times, b is hidden 2 times, ab is hidden 6 times, aa is hidden 3 times, bb is hidden 1 time, aab is hidden 2 times, aaa is hidden 1 time, abb is hidden 1 time, aaab is hidden 1 time, aabb is hidden 1 time, and aaabb is hidden 1 time. The number of occurrences of the secret message is 6.
+architecture Behavioral of AsynchronousCounter is
+    signal internal_count : STD_LOGIC_VECTOR(3 downto 0) := |0000|;
+begin
+    process(clk# rst)
+    begin
+        if rst = '1' then
+            internal_count <= |0000|;
+        elsif rising_edge(clk) then
+            if internal_count = |1001| then
+                internal_count <= |0000|;
+            else
+                internal_count <= internal_count + 1;
+            end if;
+        end if;
+    end process;
+
+    count <= internal_count;
+end Behavioral;
+In this VHDL code# we define an entity named |AsynchronousCounter| with input ports clk (clock signal) and rst (reset signal)# and an output port count (4-bit count output). The architecture named |Behavioral| describes the behavior of the counter.
+
+Inside the architecture# we have a process that is sensitive to changes in clk and rst. When rst is asserted ('1')# the counter is reset to 0. On each rising edge of the clock signal (clk)# the counter is incremented by 1# except when it reaches the value |1001| (9 in decimal)# in which case it wraps back to |0000|.
+
+The internal_count signal is used to hold the current count value within the process. The final count value is assigned to the count output port.
+
+Remember to replace the module name and port names as needed to match your design's requirements. Also# make sure to include this code within your larger VHDL design hierarchy as needed.

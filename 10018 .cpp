@@ -3,20 +3,17 @@
 using namespace std;
 ll c;
 
-ll rev(ll n)
-{
+ll rev(ll n) {
     ll p=0;
     ll temp = n;
-    while(temp)
-    {
+    while(temp) {
         p=p*10+temp%10;
         temp/=10;
     }
     return p;
 }
 
-ll pal(ll n)
-{
+ll pal(ll n) {
     ll p = rev(n);
     ll sum = p+n;
     c++;
@@ -25,14 +22,12 @@ ll pal(ll n)
     else                    return pal(sum);
 }
 
-int main()
-{
+int main() {
 
     ll n;
     int t;
     cin>>t;
-    while(t--)
-    {
+    while(t--) {
         c=0;
         cin>>n;
         ll p=pal(n);

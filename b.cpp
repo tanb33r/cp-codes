@@ -1,36 +1,52 @@
-#include <bits/stdc++.h>
-#define  f(i,n) for(int i=0; i<n; i++)
-#define  ff(i,j,n) for(int i=j; i<n; i++)
-#define  sf(i) scanf("%d",&i)
-#define  pf(i) printf("%d",i)
-#define pb(x) push_back(x);
-#define in(x) int x; cin>>x;
-#define w(t)  int t; cin>>t; while(t--)
-#define d(x)  cout<<x<<"\n"
-#define vi vector<int>
-typedef long long ll;
-using namespace std;
+#include <stdio.h>
+#include <stdbool.h>
 
-int main()
-{
+int main() {
+    FILE *fp1, *fp2;
+    int c;
+    bool in_comment = false;
+    bool in_line_comment = false;
 
-//    vi a(n);
-//    freopen("input.txt","r",stdin);
-//    freopen("output.txt","w",stdout);
+    fp1 = fopen("input.txt", "r");
+    fp2 = fopen("output.txt", "w");
 
-//    f(i,n)
-
-    w(t)
-    {
-        in(n);
-        int a[n];
-        sort(a,a+n)
-f(i,n)
-{
-    if()
-}
-        d(x);
-
+    if (!fp1) {
+        printf("Unable to open the file.\n");
+        return 0;
     }
-}
 
+    while((c = fgetc(fp1)) != EOF) {
+        if (in_comment) {
+            if (c == '*') {
+                c = fgetc(fp1);
+                if (c == '/') {
+                    in_comment = false;
+                }
+            }
+        } else if (in_line_comment) {
+            if (c == '\n') {
+                in_line_comment = false;
+                fputc(c, fp2);
+            }
+        } else {
+            if (c == '/') {
+                c = fgetc(fp1);
+                if (c == '*') {
+                    in_comment = true;
+                } else if (c == '/') {
+                    in_line_comment = true;
+                } else {
+                    fputc('/', fp2);
+                    fputc(c, fp2);
+                }
+            } else {
+                fputc(c, fp2);
+            }
+        }
+    }
+
+    fclose(fp1);
+    fclose(fp2);
+
+    return 0;
+}

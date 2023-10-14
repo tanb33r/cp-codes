@@ -1,22 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main() {
+int solve() {
     long long u,v;
-    scanf("%I64d%I64d",&u,&v);
-    if (u%2!=v%2 || u>v) {
-        printf("-1");
+    cin>>u>>v;
+    if(u%2!=v%2 || u>v) {
+        cout<<"-1\n";
         return 0;
     }
     if (u==v) {
-        if (u)
-            printf("1\n%I64d",u);
-        else
-            printf("0");
+    if (u) cout<<1<<" "<<u<<"\n";
+        else cout<<"0\n";
         return 0;
     }
     long long x=(v-u)/2;
     if (u&x)
-        printf("3\n%I64d %I64d %I64d",u,x,x);
+    cout<<3<<"\n"<<u<<" "<<x<<" "<<x<<"\n";
     else
-        printf("2\n%I64d %I64d",(u^x),x);
+        cout<<2<<"\n"<<(u^x)<<" "<<x<<"\n";
+    }
+
+int main() {
+    ios::sync_with_stdio(0),cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--)
+        solve();
 }

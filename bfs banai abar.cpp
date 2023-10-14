@@ -23,13 +23,12 @@ int col[mx],par[mx],dis[mx];
 vector <int> veca[mx];
 queue <int> q;
 
-
-
-
 void init() {
     f(i,220) {
         dis[i] = 0;
-        v[i].clear(); } }
+        v[i].clear();
+    }
+}
 
 
 void bfs(int s) {
@@ -44,25 +43,15 @@ void bfs(int s) {
                 dif[t] = dif[u]+1;
                 col[t]=1;
                 par[t]=u;
-                q.push(t); } }
+                q.push(t);
+            }
+        }
         q.pop();
-        col[u] = 2; }
+        col[u] = 2;
+    }
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

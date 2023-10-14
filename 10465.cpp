@@ -3,18 +3,15 @@
 #define  sf(i) scanf("%d",&i)
 #define  pf(i) printf("%d",i)
 using namespace std;
-int main()
-{
+int main() {
     int n, m,t;
-    while(cin>>n>>m>>t)
-    {
+    while(cin>>n>>m>>t) {
         int x[100000];
         memset(x,0,sizeof(x));
         x[n]=1;
         x[m]=1;
         f(i,t)
-        if(x[i])
-        {
+        if(x[i]) {
             x[i+n] = max(x[i]+1,x[i+n]);
             x[i+m] = max(x[i]+1,x[i+m]);
         }
