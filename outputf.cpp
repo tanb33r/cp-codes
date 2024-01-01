@@ -2,9 +2,9 @@ Add-Type -AssemblyName System.Windows.Forms
 Start-Sleep -Seconds 3
 $delayInSeconds = 0.2
 $lines = @(
-"In this script, we analyze the email addresses from the first list to deduce the most common separator used between the first name and last name. Then, we use this separator to generate email addresses for the data points in the second list, assuming that the most common separator is the likely format used.",
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer luctus tortor lacinia accumsan convallis. Nulla convallis molestie nibh rutrum accumsan. Phasellus auctor in magna eget tincidunt. Nullam feugiat urna at neque pharetra, ut sollicitudin nisi dignissim. Nullam lacinia sollicitudin ante. Proin condimentum mattis ante, nec eleifend augue consectetur non. Suspendisse aliquam, tellus eget auctor fringilla, dui leo viverra dui, nec feugiat leo dui id nibh. Quisque nunc justo, pretium vitae consectetur eu, fringilla ac neque. Aenean ultricies risus quis porta interdum. Vestibulum vel imperdiet est. Etiam commodo sollicitudin diam, sodales sagittis massa viverra sit amet. Aliquam porttitor velit vitae libero bibendum sollicitudin.",
 "",
-"Please note that this approach makes certain assumptions and simplifications about the email address format based on the provided data. It may not capture all possible variations, but it's a starting point for generating email addresses based on the observed patterns.",
+"Fusce tempus, turpis ut varius tincidunt, augue lectus efficitur odio, vel posuere quam leo eu tortor. Proin diam erat, elementum at dolor sit amet, faucibus egestas orci. Suspendisse a gravida lectus, eget scelerisque elit. In pellentesque eros ut sapien auctor, eu ultrices turpis lacinia. Nam sit amet mi nulla. Fusce ullamcorper ex pretium ipsum hendrerit, sit amet commodo ante gravida. Integer gravida magna et elit aliquet, ut pellentesque urna viverra. Aliquam sit amet lectus nec tellus elementum lacinia. Duis lorem arcu, facilisis quis tortor quis, pretium dictum velit. Fusce sed massa iaculis, consequat mauris at, blandit justo. Sed congue ut velit vitae pretium. Mauris in dictum purus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur pulvinar vestibulum justo, vel semper risus rutrum et.",
 "")
 [System.Windows.Forms.SendKeys]::SendWait("+")
 Start-Sleep -Seconds $delayInSeconds

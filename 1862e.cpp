@@ -37,15 +37,28 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
+    ll n,m,d;
+    cin>>n>>m>>d;
     int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
+    f(i,n) cin>>a[i];
+
+    set<pii> s;
+    ll sum=0;
     ll ans=0;
+    f(i,n) {
+        ll cur = sum+a[i]-d*(i+1);
+        ans = max(ans,cur);
+        if(a[i]>0) {
+            s.insert({a[i],i});
+            sum+=a[i];
+            if(s.size()>=m) {
+                sum-=s.begin()->first;
+                s.erase(s.begin());
+            }
 
+        }
 
+    }
     pr(ans);
 }
 

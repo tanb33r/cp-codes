@@ -7,12 +7,28 @@ typedef long long Long;
 using namespace std;
 
 
-    while(r - l > 1){
-        int m = (l + r) / 2;
-        if(check(m, x, a))
-            l = m;
-        else r = m;
-    }
+while(r - l > 1) {
+    int m = (l + r) / 2;
+    if(check(m, x, a))
+        l = m;
+    else r = m;
+}
+ans += check(ans+1) && ans+1<=limit; // important
+
+
+
+int ans=l;
+int l=0, r=n;
+while(l<=r) {
+    int mid=(l+r)/2;
+    int num=0;
+
+    if(check(m)) {
+        l=mid+1;
+    } else r=mid-1;
+}
+
+
 
 
 //int BS(int lo, int hi, Long x,int a[])
@@ -30,8 +46,7 @@ using namespace std;
 //        return 1 + BS(lo, mid-1, x, a) + BS(mid+1, hi, x, a);
 //}
 
-int main()
-{
+int main() {
     int a[] = {1,2,3,3,3,3,3,4};
     int x = BS(0,7,3,a);
 }

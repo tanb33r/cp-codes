@@ -1,33 +1,55 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
 using namespace std;
-#define ll long long
-ll a[200005],b[200005], l[200005], r[200005], d[200005], c[200005];
-int main()
-{
-    ll n,m,k;
-    cin >> n >> m >> k;
-    ll  i,j;
-    for(i = 1;i <= n;i++) cin >> c[i];
-    for(i = 1;i <= m;i++) cin >> l[i] >> r[i] >> d[i];
-    for(i = 1;i <= k;i++)
-    {
-        ll x,y;
-        cin >> x >> y;
-        b[x]++;
-        b[y + 1]--;
+
+vector<int> countTasks(const vector<pair<int, int>>& tasks) {
+    vector<int> result;
+
+    for (int i = 0; i < tasks.size(); ++i) {
+        int givenTaskStartTime = tasks[i].first;
+        int givenTaskEndTime = tasks[i].second;
+
+        vector<int> taskStartTimes;
+        for (const auto& task : tasks) {
+            taskStartTimes.push_back(task.first);
+        }
+
+        sort(taskStartTimes.begin(), taskStartTimes.end());
+
+        int count = 0;
+
+        auto startAfter = upper_bound(taskStartTimes.begin(), taskStartTimes.end(), givenTaskStartTime);
+        auto endBefore = lower_bound(taskStartTimes.begin(), taskStartTimes.end(), givenTaskEndTime);
+
+        for (auto it = startAfter; it != endBefore; ++it) {
+            int index = distance(taskStartTimes.begin(), it);
+            if (index != i && tasks[index].second < givenTaskEndTime) {
+                count++;
+            }
+        }
+
+        result.push_back(count);
     }
-    ll s = 0;
-    for(i = 1;i <= m;i++)
-    {
-        s += b[i];
-        a[l[i]] += s * d[i];
-        a[r[i] + 1] -= s * d[i];
-    }
-    ll ans = 0;
-    for(i = 1;i <= n;i++)
-    {
-        ans += a[i];
-        cout << ans + c[i] << " ";
-    }
+
+    return result;
 }
 
+int main() {
+    // Example usage:
+    vector<pair<int, int>> tasks = {
+        {1, 5},
+        {3, 6},
+        {0, 10},
+        // Add more tasks as needed
+    };
+
+    vector<int> results = countTasks(tasks);
+
+    for (int i = 0; i < results.size(); ++i) {
+        cout << "Task " << i << ": " << results[i] << " tasks start after and end before." << endl;
+    }
+
+    return 0;
+}
