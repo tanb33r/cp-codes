@@ -36,42 +36,61 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n=6;
-    cin>>n;
-    ll p;
-    ll ans = 1;
-    if(n&1) {
-        ll sq = (ll)sqrtl(n);
-//        debb(sq);
-        p = sq/2 + (sq&1);
+    ll n,k;
+    cin>>n>>k;
+    int a[n];
+    vector<int> z;
+    ll ans=0;
 
-    } else {
-//        if(n==2) {
-//             pr(0);
-//            return;
-//        }
-//        while(x<n) {
-//            j+=2;
-//            x+=j;
-//            ans++;
-//        }
+    int j = 1;
+    int l = n;
+    int kk = k/2;
+    int xx = n/k;
 
-        ll sq = (ll)sqrtl(n);
-        p = sq/2 ;
+    int baki = n - xx*k;
+//if()l--;
+    l-=xx;
+    j+=xx;
+//            if (flag) l++;
+//            else j--;
+//            flag = !flag;
+    bool flag = 0;
+    while(kk--) {
+//        z.pb(j);
+//        if(baki-- > 0) z.pb(l-1);
+//        else
+            z.pb(l);
+//        if(baki-- > 0) z.pb(j+1);
+//        else
+        z.pb(j);
 
+
+        j-=xx;
+        l+=xx;
     }
-    pr(p);
+    int i = 0;
+    int inc = -1;
+    while(z.size()<n) {
+        int x;
+//        if(inc)
+        x = z[i]+inc;
+        z.pb(x);
+        inc*=-1;5
+2 2
+3 2
+10 4
+13 4
+7 4
 
-
+        i++;
+    }
+    vout(z);
 }
 
 int main() {
-    set<int> s;
-    s.insert(1);
-    s.insert(8);
-
-auto it = s.begin();
-cout<<*(it)<<' ';
-it++;
-cout<<*(it);
+//    ios::sync_with_stdio(0),cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--)
+        solve();
 }

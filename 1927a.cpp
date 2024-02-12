@@ -36,42 +36,21 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n=6;
+    ll n;
     cin>>n;
-    ll p;
-    ll ans = 1;
-    if(n&1) {
-        ll sq = (ll)sqrtl(n);
-//        debb(sq);
-        p = sq/2 + (sq&1);
+    string s;
+    cin>>s;
+    while(s.size() and s.back()=='W') s.pop_back();
+    reverse(all(s));
+    while(s.size() and s.back()=='W') s.pop_back();
 
-    } else {
-//        if(n==2) {
-//             pr(0);
-//            return;
-//        }
-//        while(x<n) {
-//            j+=2;
-//            x+=j;
-//            ans++;
-//        }
-
-        ll sq = (ll)sqrtl(n);
-        p = sq/2 ;
-
-    }
-    pr(p);
-
-
+    pr(s.size());
 }
 
 int main() {
-    set<int> s;
-    s.insert(1);
-    s.insert(8);
-
-auto it = s.begin();
-cout<<*(it)<<' ';
-it++;
-cout<<*(it);
+    ios::sync_with_stdio(0),cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--)
+        solve();
 }

@@ -36,42 +36,49 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n=6;
+    ll n;
     cin>>n;
-    ll p;
-    ll ans = 1;
-    if(n&1) {
-        ll sq = (ll)sqrtl(n);
-//        debb(sq);
-        p = sq/2 + (sq&1);
+    int a[n];
+    int z[n];
+    ll ans=0;
 
-    } else {
-//        if(n==2) {
-//             pr(0);
-//            return;
-//        }
-//        while(x<n) {
-//            j+=2;
-//            x+=j;
-//            ans++;
-//        }
-
-        ll sq = (ll)sqrtl(n);
-        p = sq/2 ;
-
+    vector<int>same;
+    f(i,n) {
+        cin>>a[i];
+        z[i] = -1;
     }
-    pr(p);
+    f(i,n-1) {
+        if(a[i] == a[i+1])
+            same.pb(i);
+        else {
+            z[i] = i+1;
+            while(same.size()) {
+                z[same.back()] = i+1;
+                same.pop_back();
+            }
+        }
+    }
 
+    int q;
+    cin>>q;
+    while(q--) {
+        int l, r ;
+        cin>>l>>r;
+        l--,r--;
+        int i = l ;
+        if(z[i]<=r and z[i]>=l)
+            cout<<i+1<<' '<<z[i]+1<<'\n';
+        else
+            cout<<-1<<' '<<-1<<'\n';
+    }
+    newl;
 
 }
 
 int main() {
-    set<int> s;
-    s.insert(1);
-    s.insert(8);
-
-auto it = s.begin();
-cout<<*(it)<<' ';
-it++;
-cout<<*(it);
+    ios::sync_with_stdio(0),cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--)
+        solve();
 }

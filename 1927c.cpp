@@ -36,42 +36,66 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n=6;
-    cin>>n;
-    ll p;
-    ll ans = 1;
-    if(n&1) {
-        ll sq = (ll)sqrtl(n);
-//        debb(sq);
-        p = sq/2 + (sq&1);
+    ll n,m,k;
+    cin>>n>>m>>k;
+    int a[n];
+    int b[m];
+    ll ans=0;
 
-    } else {
-//        if(n==2) {
-//             pr(0);
-//            return;
-//        }
-//        while(x<n) {
-//            j+=2;
-//            x+=j;
-//            ans++;
-//        }
-
-        ll sq = (ll)sqrtl(n);
-        p = sq/2 ;
-
+//    map<int,vector<int>> mm;
+    map<int,set<int>> ma;
+    f(i,n) {
+        cin>>a[i];
+        if(a[i]<=k) ma[a[i]].insert(1);
     }
-    pr(p);
+    f(i,m) {
+        cin>>b[i];
+        if(b[i]<=k) ma[b[i]].insert(2);
+    }
+    int c1 = 0 ;
+    int c2 = 0 ;
+    int c3 = 0 ;
+    ff(i,1,k+1) {
+        if(ma[i].size()==1) {
+            auto it = ma[i].begin();
+            c1+=(*it == 1);
+            c2+=(*it == 2);
+        } else if(ma[i].size()==2) {
+            c3++;
+        }
+    }
+    bool ok = 0;
+    if((c3+c1)<k/2) {
+        ps(NO);
+        return;
+    } else if(c1<k/2) {
+        if(c3>= k/2- c1)
+            c3 -= k/2- c1,c1 = k/2;
+    }
+    if((c3+c2)<k/2) {
+        ps(NO);
+        return;
+    } else if(c2<k/2) {
+        if(c3>= k/2- c2)
+            c3 -= k/2- c2,c2 = k/2;
+    }
 
+    hmm((c1+c2)>=k/2)
+//    ps(YES);
 
+//    int lagbe1 = max(0ll,c3-(k/2-c1));
+//    int lagbe2 = max(0ll,c3-(k/2-c2));
+//    int lagbe2;
+//    ok |= (c1+(c3 >= k/2 and c2>= k/2);
+//    ok |= (c1 >= k/2 and c2+c3>= k/2);
+//    ok |= c1+lagbe1 >=k/2 and c2+lagbe2 >=k/2;
+//    hmm(ok);
 }
 
 int main() {
-    set<int> s;
-    s.insert(1);
-    s.insert(8);
-
-auto it = s.begin();
-cout<<*(it)<<' ';
-it++;
-cout<<*(it);
+    ios::sync_with_stdio(0),cin.tie(0);
+    int t=1;
+    cin>>t;
+    while(t--)
+        solve();
 }
