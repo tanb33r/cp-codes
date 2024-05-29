@@ -13,6 +13,7 @@ int main() {
             s2 +=  c ==' '?"-":"";
         }
 
+        cout<<"/ICSCR- ";
         cout<<s2<<'\n';
     }
 }

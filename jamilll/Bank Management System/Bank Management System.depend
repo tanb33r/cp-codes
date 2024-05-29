@@ -1,0 +1,95 @@
+# depslib dependency file v1.0
+1716578985 source:g:\ewu\new folder\cse103\project\bank management system\login.c
+
+1716582711 source:g:\ewu\new folder\cse103\project\bank management system\main.c
+	"CreateAccount.h"
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+
+1716579963 source:g:\ewu\new folder\cse103\project\bank management system\createaccount.c
+
+1716578985 source:g:\ewu\new folder\cse103\project\bank management system\login.h
+
+1716671917 g:\ewu\new folder\cse103\project\bank management system\createaccount.h
+	"Structs.h"
+	"Login.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1716671493 g:\ewu\new folder\cse103\project\bank management system\structs.h
+	<stdio.h>
+
+1716718110 g:\ewu\new folder\cse103\project\bank management system\login.h
+	<stdio.h>
+	<string.h>
+	"Structs.h"
+	"Actions.h"
+
+1716591442 g:\ewu\new folder\cse103\project\bank management system\useraccount.h
+	"structs.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1716586342 source:g:\ewu\new folder\cse103\project\bank management system\actions.h
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+
+1716706192 g:\ewu\new folder\cse103\project\bank management system\actions.h
+	"structs.h"
+	"transaction.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1716718624 g:\ewu\new folder\cse103\project\bank management system\transaction.h
+	<stdlib.h>
+	<string.h>
+
+1716582711 source:d:\e\codes\jamilll\bank management system\main.c
+	"CreateAccount.h"
+	<conio.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<windows.h>
+
+1716671917 d:\e\codes\jamilll\bank management system\createaccount.h
+	"Structs.h"
+	"Login.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1716671493 d:\e\codes\jamilll\bank management system\structs.h
+	<stdio.h>
+
+1716718110 d:\e\codes\jamilll\bank management system\login.h
+	<stdio.h>
+	<string.h>
+	"Structs.h"
+	"Actions.h"
+
+1716706192 d:\e\codes\jamilll\bank management system\actions.h
+	"structs.h"
+	"transaction.h"
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
+1716720354 d:\e\codes\jamilll\bank management system\transaction.h
+	<stdlib.h>
+	<string.h>
+

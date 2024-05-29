@@ -1,0 +1,23 @@
+Name: Alice
+Address: 123MainSt
+Date of Birth: 1990-05-15
+Phone Number: 5551234567
+Username: glicg
+Password: abc
+Balance: 500
+--------------------------
+Name: Bob
+Address: 456ElmSt
+Date of Birth: 1985-09-21
+Phone Number: 5559876543
+Username: bob
+Password: def
+Balance: 500
+--------------------------
+Name: GG
+Address: 789OakSt
+Date of Birth: 1983-07-30
+Phone Number: 5555555555
+Username: gg
+Password: 123
+Balance: 500

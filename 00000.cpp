@@ -39,11 +39,25 @@ void solve() {
     ll n;
     cin>>n;
     int a[n];
+    int b[n+1]{};
     ll ans=0;
     f(i,n) {
         cin>>a[i];
     }
+    f(i,n)
+    cin>>b[i];
 
+    int j = 0 ;
+    int i = 0 ;
+
+    while(i<n) {
+        if(a[i]>b[j])i--,ans++;
+        i++;
+        if(j==n-1) break;
+        j++;
+    }
+//    while(i<n)
+//        if(a[i++]>b[j])ans++;
 
     pr(ans);
 }
