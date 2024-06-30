@@ -1,63 +1,92 @@
-#include <bits/stdc++.h>
-#define f(i,n)             for(int i=0; i<(n); i++)
-#define ff(i,j,n)          for(int i=int(j);i<n;++i)
-#define pb                 push_back
-#define eb                 emplace_back
-#define pr(x)              cout<<x<<"\n"
-#define ps(x)              cout<<#x<<"\n"
-#define vps(x)             return void(cout<<#x<<"\n")
-#define newl               cout<<"\n"
-#define all(v)             (v).begin(), (v).end()
-#define rall(v)            (v).rbegin(), (v).rend()
-#define vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
-#define arrp(v,n)          for(int I=0;I<n;I++)cout<<v[I]<<" ";cout<<"\n"
-#define F                  first
-#define S                  second
-#define deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
-#define hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
-#define ll                 long long
-#define pii                pair<int,int>
-#define sz(x)              ((int)x.size())
-#define II                 ({ll t;cin>>t;t;})
-#define cbit(n,p)          ((n)&(1LL<<(p)))
-#define sbit(n,p)          ((n)|(1LL<<(p)))
-#define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
-//#define  cerr               if(0)cerr
-using namespace std;
-void dbg_out() {
-    cerr << endl;
-}
-template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
-    cerr << ' ' << H;
-    dbg_out(T...);
-}
-const int mod = 1e9+7;
-const int N = 1e5+7;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-void solve() {
-    string s;
-    ll n,m;
-    cin>>n>>m;
-    int a[n];
-    int b[m];
-
-    f(i,n)
-    cin>>a[i];
-    f(i,m)
-    cin>>b[i];
-    int  mm =  *max_element(b,b+m);
-    sort(a+n-mm,a+n);
-
-    f(i,n)
-    cout<<a[i]<<' ';
-    cout<<'\n';
-}
+#define MAX_LINE_LENGTH 256
 
 int main() {
-    ios::sync_with_stdio(0),cin.tie(0);
-    int t=1;
-    cin>>t;
-    while(t--)
-        solve();
+    char filename[] = "text.txt";
+    char tempFilename[] = "temp.txt";
+    char searchString[MAX_LINE_LENGTH];
+    char replacementLine[MAX_LINE_LENGTH];
+    char line[MAX_LINE_LENGTH];
+    FILE *file, *tempFile;
+    int found = 0;
+    int lineToReplace = 0;
+
+    // Prompt the user for the string to search
+    printf("Enter the string to search: ");
+    fgets(searchString, MAX_LINE_LENGTH, stdin);
+
+    // Remove the newline character from the end of the input
+    searchString[strcspn(searchString, "\n")] = 0;
+
+    // Prompt the user for the replacement line
+    printf("Enter the replacement line: ");
+    fgets(replacementLine, MAX_LINE_LENGTH, stdin);
+
+    // Remove the newline character from the end of the replacement line
+    replacementLine[strcspn(replacementLine, "\n")] = 0;
+
+    // Open the original file for reading
+    file = fopen(filename, "r");
+    if (file == NULL) {
+        perror("Error opening file");
+        return 1;
+    }
+
+    // Open the temporary file for writing
+    tempFile = fopen(tempFilename, "w");
+    if (tempFile == NULL) {
+        perror("Error opening temporary file");
+        fclose(file);
+        return 1;
+    }
+
+    // Read each line of the file
+    while (fgets(line, MAX_LINE_LENGTH, file) != NULL) {
+        // Write the current line to the temporary file
+        fputs(line, tempFile);
+
+        // Remove the newline character from the end of the line
+        line[strcspn(line, "\n")] = 0;
+
+        // Check if the search string is in the current line
+        if (lineToReplace == 1) {
+            // Write the replacement line to the temporary file
+            fputs(replacementLine, tempFile);
+            fputs("\n", tempFile);
+            lineToReplace = 0;
+            found = 1;
+        }
+
+        if (strstr(line, searchString) != NULL) {
+            lineToReplace = 1;
+        }
+    }
+
+    // Close both files
+    fclose(file);
+    fclose(tempFile);
+
+    // Replace the original file with the temporary file
+    if (found) {
+        if (remove(filename) != 0) {
+            perror("Error deleting the original file");
+            return 1;
+        }
+
+        if (rename(tempFilename, filename) != 0) {
+            perror("Error renaming the temporary file");
+            return 1;
+        }
+
+        printf("The line following the matched string has been replaced successfully.\n");
+    } else {
+        // If no match was found, delete the temporary file
+        remove(tempFilename);
+        printf("String not found in the file.\n");
+    }
+
+    return 0;
 }
