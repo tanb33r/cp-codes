@@ -36,31 +36,19 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void bin(int n) {
-    /* step 1 */
-    if (n > 1)
-        bin(n / 2);
-
-    /* step 2 */
-    cout << n % 2;
-}
-
 void solve() {
-    string s;
-    cin>>s;
-    int a = 1;
-    f(i,s.size()-1) {
-        cout<<s[i];
-        if(a and s[i] == s[i+1])   {
-            cout<<(s[i]=='a'? 'b':'a');
-            a=0;
-        }
+    ll n,k;
+    cin>>n;
+    cin>>k;
+    int ans =0 ;
+    if(n==1) {
+        pr(0);
+        return;
     }
-    cout<<s.back();
-    if(a)
-        cout<<(s.back()=='a'? 'b':'a');
 
-    newl;
+    ans = (n-1+k-2)/(k-1);
+
+    pr(ans);
 }
 
 int main() {

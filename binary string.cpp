@@ -9,6 +9,10 @@ int osci(string s) {
 }
 
 vector<int> V;
+
+    f(i,n) {
+        cin>>a[i];
+    }
 int veclen(string s) {
     char c = 'X';
     int l = 0;

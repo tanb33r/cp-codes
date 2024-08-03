@@ -36,31 +36,33 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void bin(int n) {
-    /* step 1 */
-    if (n > 1)
-        bin(n / 2);
-
-    /* step 2 */
-    cout << n % 2;
-}
 
 void solve() {
-    string s;
-    cin>>s;
+    string s[4];
+    int n;
+    cin>>n>>s[1]>>s[2];
+    s[0] = string(n+2,'x');
+    s[3] = string(n+2,'x');
     int a = 1;
-    f(i,s.size()-1) {
-        cout<<s[i];
-        if(a and s[i] == s[i+1])   {
-            cout<<(s[i]=='a'? 'b':'a');
-            a=0;
+    s[1] = 'x'+s[1]+'x';
+    s[2] = 'x'+s[2]+'x';
+    int ans = 0 ;
+    ff(i,1,3) {
+        ff(j,1,s[i].size()-1) {
+            int cnt = 0;
+            int cntx = 0;
+            cntx += s[i+1][j+1] == 'x';
+            cntx += s[i-1][j-1] == 'x';
+            cntx += s[i+1][j-1] == 'x';
+            cntx += s[i-1][j+1] == 'x';
+            cnt += s[i+1][j] == '.';
+            cnt += s[i-1][j] == '.';
+            cnt += s[i][j+1] == '.';
+            cnt += s[i][j-1] == '.';
+            ans += cnt == 3 and cntx == 4;
         }
     }
-    cout<<s.back();
-    if(a)
-        cout<<(s.back()=='a'? 'b':'a');
-
-    newl;
+    pr(ans);
 }
 
 int main() {
