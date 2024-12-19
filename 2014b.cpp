@@ -37,16 +37,13 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    ll n,k;
+    cin>>n>>k;
+    k = n-k;
+    ll nn = (n*(n+1))/2;
+    ll kk = (k*(k+1))/2;
 
-
-    pr(ans);
+    hmm(!((nn-kk)&1));
 }
 
 int main() {

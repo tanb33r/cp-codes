@@ -40,11 +40,18 @@ void solve() {
     ll n;
     cin>>n;
     int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
 
+    f(i,n)     cin>>a[i];
+    sort(a,a+n);
+    reverse(a,a+n);
+
+    ll ans=0;
+    int b = 10000, c = 0;
+    f(i,n) {
+        b = min(a[i], b);
+        c = max(a[i], c);
+    }
+        ans += (c-b)*(n-1);
 
     pr(ans);
 }

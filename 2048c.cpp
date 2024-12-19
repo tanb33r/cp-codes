@@ -17,13 +17,13 @@
 #define deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
 #define hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
 #define ll                 long long
-#define pii                pair<int,int>
+#define pii                pair<long long,long long>
 #define sz(x)              ((int)x.size())
 #define II                 ({ll t;cin>>t;t;})
 #define cbit(n,p)          ((n)&(1LL<<(p)))
 #define sbit(n,p)          ((n)|(1LL<<(p)))
 #define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(VA_ARGS)
 //#define  cerr               if(0)cerr
 using namespace std;
 void dbg_out() {
@@ -36,23 +36,63 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+ll arr[200005];
+ll crr[200005];
+ll brr[200005];
+ll n,m,k;
+
+string fnc(string a, string b) {
+    ll i,j;
+    string s;
+    reverse(a.begin(),a.end());
+    reverse(b.begin(),b.end());
+    for(i=0; i<a.size(); i++) {
+        if(b.size()<=i) {
+            s.push_back(a[i]);
+        } else {
+            if(a[i]==b[i]) s.push_back('0');
+            else s.push_back('1');
+        }
     }
-    ll ans=0;
+    reverse(s.begin(),s.end());
+    return s;
+}
 
+void solve() {
+    ll l,r,i,j,a,b,c;
 
-    pr(ans);
+    cin>>n;
+    string s;
+    string ans;
+
+    for(i=1; i<=n; i++) {
+        cin>>s;
+        ans = s;
+        for(j=0; j<s.size(); j++) {
+            if(s[j]=='0') break;
+        }
+
+        if(j==s.size()) {
+            cout<<1<<" "<<1<<" "<<1<<" "<<s.size()<<endl;
+        } else {
+            ll len = s.size()-j;
+            ll result=0;
+            for(j=0; j+len-1<s.size(); j++) {
+                string ss=s.substr(j,len);
+                string temp=fnc(s,ss);
+                if(temp>ans) {
+                    result = j;
+                    ans = temp;
+                }
+            }
+            cout<<result+1<<" "<<result+len<<" "<<1<<" "<<s.size()<<endl;
+        }
+    }
+//    pr(ans);
 }
 
 int main() {
     ios::sync_with_stdio(0),cin.tie(0);
     int t=1;
-    cin>>t;
-    while(t--)
-        solve();
+    solve();
 }

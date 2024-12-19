@@ -15,7 +15,7 @@
 #define F                  first
 #define S                  second
 #define deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
-#define hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
+#define hmm(x)             cout<<((x)?"Kosuke":"Sakurako")<<"\n";
 #define ll                 long long
 #define pii                pair<int,int>
 #define sz(x)              ((int)x.size())
@@ -37,16 +37,16 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
+    int n;
     cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
-
-
-    pr(ans);
+//    int x = 0 ;
+//    int ans = 0;
+//    while(x<=n)
+//    {
+//        ans++;
+//        x = (ans * (ans+1))/2;
+//    }
+    hmm(n&1);
 }
 
 int main() {

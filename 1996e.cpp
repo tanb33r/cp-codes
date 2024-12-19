@@ -1,12 +1,11 @@
 #include <bits/stdc++.h>
 #define f(i,n)             for(int i=0; i<(n); i++)
 #define ff(i,j,n)          for(int i=int(j);i<n;++i)
-#define fr(i,n,j)          for(int i=int(n);i>=j;--i)
 #define pb                 push_back
 #define eb                 emplace_back
 #define pr(x)              cout<<x<<"\n"
-#define vps(x)             return void(cout<<#x<<"\n")
 #define ps(x)              cout<<#x<<"\n"
+#define vps(x)             return void(cout<<#x<<"\n")
 #define newl               cout<<"\n"
 #define all(v)             (v).begin(), (v).end()
 #define rall(v)            (v).rbegin(), (v).rend()
@@ -33,18 +32,31 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
     cerr << ' ' << H;
     dbg_out(T...);
 }
-const int mod = 1e9+7;
+const ll mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    string s;
+    cin>>s;
+    s = "7" + s;
 
+    int n = s.size();
+    ll pref[n+1] {};
+
+    ll ans=0;
+    ff(i, 1, n)
+    pref[i] += pref[i-1] + (s[i]=='1'? 1 : -1);
+
+    map<ll, ll> m;
+
+    f(i,n) {
+        ll curval = pref[i];
+        ll sum = m[curval];
+        ll r = n-i;
+        ans += r*(sum%mod);
+        ans %= mod;
+        m[curval] += i + 1;
+    }
 
     pr(ans);
 }

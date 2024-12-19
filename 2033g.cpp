@@ -36,15 +36,67 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+ll arr[500010];
+ll dp[100005][4];
+ll n;
 
+ll DP(ll src, ll isSwap) {
+    if(n%2==0 and src>n/2) return 0;
+    if(src > n/2+1) return 0;
+
+    if(dp[src][isSwap]!=-1) return dp[src][isSwap];
+
+    ll a=0, j=n-src+1, b=0, ans=0;
+    if(isSwap == 0 ) {
+        if(arr[src-1]==arr[src])
+            a++;
+
+        if(arr[j]==arr[j+1])
+            a++;
+
+        if(arr[src-1]==arr[j])
+            b++;
+
+        if(arr[src]==arr[j+1])
+            b++;
+
+        ans = min(a+DP(src+1, 0), b+ DP(src+1, 1));
+
+    } else {
+        if(arr[src-1]==arr[src])
+            a++;
+
+        if(arr[j]==arr[j+1])
+            a++;
+
+        if(arr[src-1]==arr[j])
+            b++;
+
+        if(arr[src]==arr[j+1])
+            b++;
+
+        ans = min(b+DP(src+1, 0), a+ DP(src+1, 1));
+    }
+
+    if(src == n/2 and n%2 == 0 and arr[src] == arr[j])
+        ans++;
+
+    return dp[src][isSwap]=ans;
+}
+
+void solve() {
+    cin>>n;
+
+    for(int i=1; i<=n; i++)
+        for(int j=0; j<=2; j++)
+            dp[i][j]=-1;
+
+    for(int i=1; i<=n; i++)
+        cin>>arr[i];
+
+
+    arr[n+1] = 0;
+    ll ans = DP(1,0);
 
     pr(ans);
 }

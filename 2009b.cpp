@@ -35,18 +35,40 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 }
 const int mod = 1e9+7;
 const int N = 1e5+7;
+int countRightTriangles(const vector<pair<int, int>>& points) {
+    unordered_map<int, int> countX, countY;
+
+    // Count the number of points with the same x and y coordinates
+    for (const auto& point : points) {
+        countX[point.F]++;
+        countY[point.S]++;
+    }
+
+    int ans = 0;
+
+    for (const auto& point : points) {
+        int x = point.F;
+        int y = point.S;
+        ans += (countX[x] - 1) * (countY[y] - 1);
+    }
+
+    return ans;
+}
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    int n;
+    cin >> n;
+    vector<pair<int, int>> p(n);
+
+    vector<int> ans;
+    for (int i = 0; i < n; ++i) {
+        int x, y;
+        cin >> x >> y;
+        p[i] = {x, y};
     }
-    ll ans=0;
 
-
-    pr(ans);
+    ans.push_back(countRightTriangles(points));
+vout(ans);
 }
 
 int main() {

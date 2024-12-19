@@ -37,16 +37,27 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll n,a,b;
+    string s;
+    cin >> n >> a >> b>>s;
+    int x = 0,y = 0;
+    f(j,15) {
+        f(i,s.size()) {
+            if(s[i]=='N') y++;
+            if(s[i]=='S') y--;
+            if(s[i]=='E') x++;
+            if(s[i]=='W') x--;
+
+            if(x==a and y==b) {
+                ps(YES);
+                return;
+            }
+        }
     }
-    ll ans=0;
+
+    ps(NO);
 
 
-    pr(ans);
 }
 
 int main() {

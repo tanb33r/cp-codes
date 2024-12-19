@@ -1,72 +1,24 @@
-#include <bits/stdc++.h>
-#define f(i,n)             for(int i=0; i<(n); i++)
-#define ff(i,j,n)          for(int i=int(j);i<n;++i)
-#define fr(i,n,j)          for(int i=int(n);i>=j;--i)
-#define pb                 push_back
-#define eb                 emplace_back
-#define pr(x)              cout<<x<<"\n"
-#define vps(x)             return void(cout<<#x<<"\n")
-#define ps(x)              cout<<#x<<"\n"
-#define newl               cout<<"\n"
-#define all(v)             (v).begin(), (v).end()
-#define rall(v)            (v).rbegin(), (v).rend()
-#define vout(v)            for(int I=0;I<(v).size();I++)cout<<v[I]<<" ";cout<<"\n"
-#define arrp(v,n)          for(int I=0;I<n;I++)cout<<v[I]<<" ";cout<<"\n"
-#define F                  first
-#define S                  second
-#define deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
-#define hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
-#define ll                 long long
-#define pii                pair<int,int>
-#define sz(x)              ((int)x.size())
-#define II                 ({ll t;cin>>t;t;})
-#define cbit(n,p)          ((n)&(1LL<<(p)))
-#define sbit(n,p)          ((n)|(1LL<<(p)))
-#define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
-//#define  cerr               if(0)cerr
+#include <algorithm> // for lower_bound, upper_bound and sort
+#include <iostream>
+#include <vector> // for vector
+
 using namespace std;
-void dbg_out() {
-    cerr << endl;
-}
-template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
-    cerr << ' ' << H;
-    dbg_out(T...);
-}
-const int mod = 1e9+7;
-const int N = 1e5+7;
 
-void bin(int n) {
-    /* step 1 */
-    if (n > 1)
-        bin(n / 2);
+int main()
+{
+    // Note that the array is sorted
+    int gfg[] = { 5, 5, 5,  7};
 
-    /* step 2 */
-    cout << n % 2;
-}
+    vector<int> v(gfg, gfg + 8); // 5 5 5 6 6 6 7 7
 
-void solve() {
-    string s;
-    cin>>s;
-    int a = 1;
-    f(i,s.size()-1) {
-        cout<<s[i];
-        if(a and s[i] == s[i+1])   {
-            cout<<(s[i]=='a'? 'b':'a');
-            a=0;
-        }
-    }
-    cout<<s.back();
-    if(a)
-        cout<<(s.back()=='a'? 'b':'a');
+    vector<int>::iterator lower, upper;
+    lower = lower_bound(v.begin(), v.end(), 7);
+    upper = upper_bound(v.begin(), v.end(), 7);
 
-    newl;
-}
+    cout << "lower_bound for 6 at index "
+         << (lower - v.begin()) << '\n';
+    cout << "upper_bound for 6 at index "
+         << (upper - v.begin()) << '\n';
 
-int main() {
-    ios::sync_with_stdio(0),cin.tie(0);
-    int t=1;
-    cin>>t;
-    while(t--)
-        solve();
+    return 0;
 }

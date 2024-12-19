@@ -38,15 +38,18 @@ const int N = 1e5+7;
 
 void solve() {
     ll n;
-    cin>>n;
-    int a[n];
+    cin >> n;
+    ll a[n];
     f(i,n) {
-        cin>>a[i];
+        cin >> a[i];
     }
-    ll ans=0;
+    bool ans=1;
+    f(i,n-1) {
+        ll x = abs(a[i+1]-a[i]);
+        ans &= ((x==5) or (x==7));
+    }
 
-
-    pr(ans);
+    hmm(ans);
 }
 
 int main() {

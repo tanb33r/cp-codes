@@ -36,16 +36,66 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
+const int S = 1e5+5;
+bool prime[S];
+
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
+    ll a[n];
+    map<ll,int> m;
+    int p = 0;
+
     f(i,n) {
         cin>>a[i];
+        m[a[i]]++;
     }
-    ll ans=0;
+    if(n==1) vps(1);
+    if(n==2) {
+        pr(a[1]-a[0]);
+        return;
+    }
+
+    vector<ll> v;
+
+    ff(i,1,n) {
+        v.pb(a[i]-a[0]);
+        if(n&1 and i>1)
+            v.pb(a[i]-a[1]);
+    }
+
+    sort(all(v));
+    int S = v.size();
+    int I = 0 ;
+    ll ans = -1;
+//    ps(asd);
+//    vout(v);
+    while(I<S) {
+        map<ll,int> m2;
+        int l = 1;
+        int cnt = 0;
+        f(i,n) {
+            if(m2[a[i]]) continue;
+            ll s =  a[i+1];
+
+            if(m[s]) {
+                m2[a[i]] = 1;
+                m2[s] = 1;
+                cnt+=2;
+            }
+        }
+
+        f(i,n)
+        cout<<m2[a[i]]<<' ';
+        newl;
 
 
+        if(cnt+1>=n) {
+            ans = v[I];
+            break;
+        }
+        I++;
+    }
     pr(ans);
 }
 

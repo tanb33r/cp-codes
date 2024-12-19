@@ -38,14 +38,14 @@ const int N = 1e5+7;
 
 void solve() {
     ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    cin >> n;
+    vector<ll> a(n);
 
-
+    f(i,n) cin >> a[i];
+    sort(all(a));
+    int ans = n;
+    f(i,n-1)
+    ans = min(ans, i + (a.end() - lower_bound(all(a), a[i] + a[i + 1])));
     pr(ans);
 }
 

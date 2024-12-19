@@ -17,13 +17,13 @@
 #define deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
 #define hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
 #define ll                 long long
-#define pii                pair<int,int>
+#define pii                pair<long long,long long>
 #define sz(x)              ((int)x.size())
 #define II                 ({ll t;cin>>t;t;})
 #define cbit(n,p)          ((n)&(1LL<<(p)))
 #define sbit(n,p)          ((n)|(1LL<<(p)))
 #define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(_VA_ARGS_)
 //#define  cerr               if(0)cerr
 using namespace std;
 void dbg_out() {
@@ -36,17 +36,24 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
+ll arr[200005];
+ll crr[200005];
+ll brr[200005];
+
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    ll l,r,i,j,k,a,b,c,n,m;
+    string s;
+    ll x;
+    cin>>x;
 
+    hmm(!(x%33));
+//        vps(NO);
+//    while(x>33) {
+//        x-=33;
+//        pr(x);
+//    }
 
-    pr(ans);
+//    pr();
 }
 
 int main() {
@@ -56,3 +63,4 @@ int main() {
     while(t--)
         solve();
 }
+

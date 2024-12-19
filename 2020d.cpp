@@ -36,17 +36,60 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
+string s,s1,s2;
+ll n,m;
+ll par[500005];
+
+vector<ll>v1;
+vector<pair<ll,pair<ll,ll>>> v[11];
+map<ll,ll>mp;
+ll vis[500005];
+
+ll bapKhoja(ll ss) {
+    if(ss == par[ss]) return ss;
+    return par[ss]=bapKhoja(par[ss]);
+}
+
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+
+    ll a,b,c,l;
+
+    ll ans=0,sum=0,temp;
+
+    cin>>n>>m;
+    for(ll i=1; i<=n; i++) par[i]=i;
+    for(ll i=1; i<=m; i++) {
+        cin>>a>>b>>c;
+        v[b].push_back({a+b*c,{a,c}});
     }
-    ll ans=0;
 
+    for(ll i=1; i<=10; i++) {
+        sort(v[i].begin(),v[i].end());
+        reverse(v[i].begin(),v[i].end());
+    }
 
-    pr(ans);
+    for(ll i=1; i<=10; i++) {
+        for(ll j=1; j<=n; j++) vis[j]=0;
+        for(ll j=0; j<v[i].size(); j++) {
+            pair<ll,pair<ll,ll>> a2= v[i][j];
+            pair<ll,ll> A=a2.S;// starting point
+            for(l = A.F; l<=A.F+i*A.S; l+=i) {
+                a= bapKhoja(A.F); // parent 5
+                b= bapKhoja(l); // majhkhaner kono node parent 3
+                if(b<a) par[a] = b;
+                else par[b]=a;
+                if(vis[l]==1) break;
+                vis[l]=1;
+            }
+        }
+    }
+
+    set<ll> st;
+    for(ll i=1; i<=n; i++)
+        st.insert(bapKhoja(i));
+    pr(st.size());
+
+    for(ll i=1; i<=10; i++) v[i].clear();
 }
 
 int main() {

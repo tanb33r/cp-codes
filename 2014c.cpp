@@ -37,16 +37,25 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
+    ll n, sum=0, m=0;
     cin>>n;
-    int a[n];
+    ll a[n];
     f(i,n) {
         cin>>a[i];
+        sum += a[i];
     }
-    ll ans=0;
 
+    if(n<=2) {
+        pr(-1);
+        return;
+    }
+    sort(a,a+n);
 
-    pr(ans);
+    ll should = ((a[n/2])*2)*n;
+
+    ll need = max(0ll,should-sum+1);
+    pr(need);
+
 }
 
 int main() {

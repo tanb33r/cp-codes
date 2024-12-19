@@ -37,16 +37,25 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    ll n,q;
+    cin>>n>>q;
+    ll a[n+1];
+
+    ff(i,1,n+1)
+    cin>>a[i];
+
+    map<ll,ll> mp;
+
+    ff(i,1,n)
+    mp[i*(n-i)]+= a[i+1]-a[i]-1;
 
 
-    pr(ans);
+    ff(i,1,n+1)
+    mp[i*(n-i+1)-1]++;
+
+    f(i,q)
+    cout<<(mp[II])<<' ';
+    newl;
 }
 
 int main() {

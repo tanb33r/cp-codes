@@ -39,14 +39,21 @@ const int N = 1e5+7;
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
-
-
-    pr(ans);
+    string s;
+    cin>>s;
+//    size_t found = s.find("11", 1);
+    int z = count(all(s), '0');
+    int o = count(all(s), '1');
+//    size_t found = s.find("11", 1);
+    if (z<o)
+        ps(yes);
+    else
+        ps(no);
+//
+//    ll ans=0;
+//
+//
+//    pr(ans);
 }
 
 int main() {

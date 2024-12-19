@@ -37,16 +37,33 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll a=0,b,c,d;
+    cin>>b>>c>>d;
+    for (ll i = 0; i < 62; ++i) {
+        ll b2 = (b>>i)&1;
+        ll c2 = (c>>i)&1;
+        ll d2 = (d>>i)&1;
+
+        ll a2 = 0;
+        if(b2==0 and c2== 1 and d2==1) {
+            pr(-1);
+            return;
+        }
+        if(b2==1 and d2==0 and c2==0) {
+            pr(-1);
+            return;
+        }
+        if(b2==0 and c2 == 0 and d2==0) a2 = 0;
+        if(b2==0 and c2 == 0 and d2==1) a2 = 1;
+        if(b2==0 and c2 == 1 and d2==0) a2 = 0;
+        if(b2==1 and c2 == 0 and d2==1) a2 = 0; // both are possible
+        if(b2==1 and c2 == 1 and d2==0) a2 = 1;
+        if(b2==1 and c2 == 1 and d2==1) a2 = 0;
+
+        a |= (a2 << i);
     }
-    ll ans=0;
 
-
-    pr(ans);
+    pr(a);
 }
 
 int main() {

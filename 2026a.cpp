@@ -37,16 +37,13 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
-
-
-    pr(ans);
+    int x, y, k;
+    cin>>x>>y>>k;
+    int ax,ay,bx,by,cx,cy,dx,dy;
+    int MIN = min(x,y);
+    int MAX = max(x,y);
+    pr(0<<' '<<0<<' '<<MIN<<' '<<MIN);
+    pr(0<<' '<<MIN<<' '<<MIN<<' '<<0);
 }
 
 int main() {

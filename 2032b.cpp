@@ -37,16 +37,32 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll n,k;
+    cin>>n>>k;
+    if(n==1) {
+        pr(1);
+        pr(1);
+        return;
     }
-    ll ans=0;
 
+    if(k == 1 or k ==n)
+        vps(-1);
 
-    pr(ans);
+    if(k%2==0) {
+        pr(3);
+        cout<<1<<' '<<k<<' '<<k+1<<'\n';
+    } else {
+
+        if(k <= 2 or k+1 >= n)
+            vps(-1);
+
+        pr(5);
+        cout<<1<<' ';
+        cout<<2<<' ';
+        cout<<k<<' ';
+        cout<<k+1<<' ';
+        cout<<k+2<<'\n';
+    }
 }
 
 int main() {

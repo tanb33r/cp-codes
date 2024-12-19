@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <vector>
+
 #define f(i,n)             for(int i=0; i<(n); i++)
 #define ff(i,j,n)          for(int i=int(j);i<n;++i)
 #define fr(i,n,j)          for(int i=int(n);i>=j;--i)
@@ -35,16 +37,56 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 }
 const int mod = 1e9+7;
 const int N = 1e5+7;
+ll maxLevel;
+void dfs(ll node, ll parent, ll level,
+         vector<ll> &currentNodeCount,
+         vector<ll> &maxD,
+         vector<vector<int>> &v) {
+
+    maxLevel = max(maxLevel, level);
+    currentNodeCount[level]++;
+    maxD[node] = level;
+
+    for(auto child : v[node]) {
+        if(child != parent) {
+            dfs(child, node, level+1, currentNodeCount,maxD, v);
+            maxD[node] = max(maxD[node], maxD[child]);
+        }
+    }
+}
 
 void solve() {
-    ll n;
+    int n;
     cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    vector<vector<int>> v(n+1);
+    maxLevel = 0;
 
+    f(i,n-1) {
+        int x, y;
+        cin>>x>>y;
+        v[x].pb(y);
+        v[y].pb(x);
+    }
+    vector<ll> maxD(n+1,0);
+    vector<ll> currentNodeCount(n+1,0);
+    vector<ll> pref(n+3,0);
+
+    dfs(1, -1, 1, currentNodeCount,maxD, v);
+
+    ff(i,1,n+1)
+    pref[maxD[i]]++;
+
+    ff(i,1,n+1) {
+        pref[i] += pref[i-1];
+        currentNodeCount[i] += currentNodeCount[i-1];
+    }
+
+    ll ans = n-1;
+    ff(i,1,maxLevel+1) {
+        ll del = currentNodeCount[maxLevel] - currentNodeCount[i];
+        del += pref[i-1];
+        ans = min(ans,del);
+    }
 
     pr(ans);
 }

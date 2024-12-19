@@ -40,12 +40,15 @@ void solve() {
     ll n;
     cin>>n;
     int a[n];
+    ll odd = 0,even = 0;
+
     f(i,n) {
-        cin>>a[i];
+        ll x;
+        cin>>x;
+        (i&1)? odd=max(odd,x) : even=max(even,x);
     }
-    ll ans=0;
-
-
+//debb(odd,even);
+    ll ans = max(odd+(n)/2,even+(n+1)/2);
     pr(ans);
 }
 

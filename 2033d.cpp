@@ -36,15 +36,30 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+map<ll,ll>mp;
+ll a[500010];
 
+void solve() {
+    int n;
+
+    cin>>n;
+    ll ans=0;
+    ll sum=0;
+
+    mp.clear();
+    mp[0]=1;
+
+    ll last = 1;
+    for(int i=1; i<=n; i++) {
+        cin>>a[i];
+        sum += a[i];
+
+        if(mp[sum]>=last) {
+            last = i;
+            ans++;
+        }
+        mp[sum]=i;
+    }
 
     pr(ans);
 }

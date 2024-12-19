@@ -37,16 +37,44 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll n,b,c;
+    cin >> n>>b>>c;
+
+    if(b==1 and !c)
+        vps(0);
+
+//    if(!b and !c and n==1) {
+//        vps(0);
+//    }
+//    if(!b and !c and n==2) {
+//        vps(1);
+//    }
+//    if(!b and !c) {
+//        vps(-1);
+//    }
+
+    ll ans=n;
+
+    if(c>=n) {
+        pr(n);
+        return;
     }
-    ll ans=0;
 
+    if(!b) {
+        if(c == n-1 or c+2 == n) {
+            pr(n-1);
+            return;
+        }
 
-    pr(ans);
+        if(c < n) {
+            pr(-1);
+            return;
+        }
+    }
+
+    ans = min(((n-c)/b + 1), n);
+    //ps(last);
+    pr(n-ans);
 }
 
 int main() {

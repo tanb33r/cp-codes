@@ -36,17 +36,15 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
+bool cmp(int a,int b) {
+    return (a%2)>(b%2);
+}
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    ll a,b;
+    cin>>a>>b;
 
 
-    pr(ans);
+    pr(b-a);
 }
 
 int main() {

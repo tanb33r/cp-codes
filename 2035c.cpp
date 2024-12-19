@@ -39,14 +39,63 @@ const int N = 1e5+7;
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+//    int a[n];
 
+    vector<int> v;
+    map<int, int> m;
+    int mm = 0;
+    if(n%2==0 and __builtin_popcountll(n) == 1) {
+        mm=1;
+        n--;
+    }
+
+    if(n&1) {
+        ll k;
+        ll kk = 1;
+        while (kk<=n) kk*=2;
+
+        m[n-1]++;
+        m[n]++;
+        m[1]++;
+        m[3]++;
+        v.pb(n);
+        v.pb(n-1);
+        v.pb(3);
+        v.pb(1);
+    } else {
+        ll k;
+        ll kk = 1;
+        while (kk<=n) kk*=2;
+
+        kk/=2;
+        kk--;
+        k = kk;
+//    debb(kk);
+        m[k]++;
+        int l = 1;
+        if(k==n-1) l++;
+        m[n-l]++;
+        m[n]++;
+        v.pb(k);
+        v.pb(n-l);
+        v.pb(n);
+
+    }
+    ll ans = 0;
+    f(i,n)
+    if(m[i+1]==0)
+        v.pb(i+1);
+
+    reverse(all(v));
+
+    if(mm) v.pb(++n);
+
+    f(i,n)
+    if(i&1) ans |= v[i];
+    else ans &= v[i];
 
     pr(ans);
+    vout(v);
 }
 
 int main() {

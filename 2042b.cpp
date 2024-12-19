@@ -17,13 +17,13 @@
 #define deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
 #define hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
 #define ll                 long long
-#define pii                pair<int,int>
+#define pii                pair<long long,long long>
 #define sz(x)              ((int)x.size())
 #define II                 ({ll t;cin>>t;t;})
 #define cbit(n,p)          ((n)&(1LL<<(p)))
 #define sbit(n,p)          ((n)|(1LL<<(p)))
 #define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(_VA_ARGS_)
 //#define  cerr               if(0)cerr
 using namespace std;
 void dbg_out() {
@@ -36,17 +36,34 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
+ll arr[200005];
+ll crr[200005];
+ll brr[200005];
+
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll l,r=0,i,j,k,a,b,c,n,m;
+
+    cin>>n>>k;
+    ll sum = 0;
+    for(i=1; i<=n; i++) {
+        cin>>arr[i];
+        sum+=arr[i];
     }
-    ll ans=0;
+    sort(arr+1,arr+n+1);
+    reverse(arr+1,arr+n+1);
 
+    ll ans = 0 ;
+    for(i=1; i<=n; i++) {
+        if(r+arr[i] >k ) {
+            ans = k-r;
 
-    pr(ans);
+            pr(ans);
+            return;
+        } else {
+            r+=arr[i];
+        }
+    }
+    pr(k-sum);
 }
 
 int main() {
@@ -56,3 +73,4 @@ int main() {
     while(t--)
         solve();
 }
+

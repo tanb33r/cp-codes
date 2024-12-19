@@ -39,14 +39,18 @@ const int N = 1e5+7;
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll ans=n;
+    ll counted = 0;
+    while(1) {
+        ll sq = sqrt(n);
+
+        if(sq > counted) {
+            n += sq-counted;
+            counted = sq;
+        } else break;
     }
-    ll ans=0;
 
-
-    pr(ans);
+    pr(n);
 }
 
 int main() {

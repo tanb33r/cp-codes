@@ -39,12 +39,29 @@ const int N = 1e5+7;
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+    int a[n][n];
+    f(i,n)
+    f(j,n)
+    cin>>a[i][j];
 
+    vector<int> vals;
+
+    for (int diag = -(n - 1); diag <= (n - 1); ++diag) {
+        int m = INT_MAX;
+
+        f(i,n) {
+            int j = i - diag;
+            if (j >= 0 && j < n)
+                m = min(m, a[i][j]);
+        }
+
+        vals.pb(m);
+    }
+
+//    vout(vals);
+    ll ans = 0;
+    f(i,vals.size())
+    ans += vals[i] > 0? 0 :  -vals[i];
 
     pr(ans);
 }

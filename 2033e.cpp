@@ -36,20 +36,48 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
+ll a[1000005];
+ll vis[1000005];
+ll dp[1000005];
+
+ll cnt(ll src, ll target) {
+    if(vis[src] == 1) return 0;
+
+    vis[src]=1;
+    if(src==target) return 1;
+    return cnt(a[src], target) + 1;
+}
+
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
 
+    for(int i=1; i<=n; i++)
+        vis[i]=0;
+
+    ll ans = 0;
+    ll sum = 0;
+
+    f(i,n) cin>>a[i+1];
+
+    for(int i=1; i<=n; i++) {
+        if(a[i]==i or a[a[i]]==i) continue;
+        if(vis[a[i]]==1) continue;
+
+        ll x = cnt(a[i],i);
+        ans+=dp[x];
+    }
 
     pr(ans);
 }
 
+
 int main() {
+    dp[1] = dp[2] = 0;
+    dp[3] = 1;
+    for(int i=4; i <= 1000000; i++)
+        dp[i] = dp[i-2]+1;
+
     ios::sync_with_stdio(0),cin.tie(0);
     int t=1;
     cin>>t;

@@ -23,7 +23,7 @@
 #define cbit(n,p)          ((n)&(1LL<<(p)))
 #define sbit(n,p)          ((n)|(1LL<<(p)))
 #define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(_VA_ARGS_)
 //#define  cerr               if(0)cerr
 using namespace std;
 void dbg_out() {
@@ -36,15 +36,32 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+vector<ll> v[100005];
+ll n,m;
+
+void query() {
+    ll k;
+    int a,b;
+    char ch;
+    cin>>k;
+
+    ll up=0, down=n-1;
+    f(i,k) {
+        cin>>a>>ch>>b;
+
+        if(ch == '>') {
+            up=max(up, (ll)(upper_bound(v[a-1].begin(),v[a-1].end(), b)-v[a-1].begin()));
+        } else {
+            down=min(down,(ll)(lower_bound(v[a-1].begin(),v[a-1].end(), b)-v[a-1].begin()-1));
+        }
     }
+
     ll ans=0;
 
+    if(up<=down)
+        ans=up+1;
+    else
+        ans=-1;
 
     pr(ans);
 }
@@ -52,7 +69,26 @@ void solve() {
 int main() {
     ios::sync_with_stdio(0),cin.tie(0);
     int t=1;
-    cin>>t;
+
+
+    cin>>n>>m>>t;
+    ll arr[n+1][m+1],i,j;
+
+    f(i,n)
+    f(j,m)
+    cin>>arr[i][j];
+
+
+
+    f(i,m) {
+        ll a=0;
+        f(j,n) {
+            a=(a|arr[j][i]);
+            v[i].pb(a);
+        }
+        v[i].pb(200000000000);
+    }
+
     while(t--)
-        solve();
+        query();
 }

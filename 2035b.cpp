@@ -35,18 +35,27 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 }
 const int mod = 1e9+7;
 const int N = 1e5+7;
+string sol(ll n) {
+    if (n == 1) return "-1";
+    if (n == 2) return "66";
+    if (n == 3) return "-1";
+    if (n == 4) return "3366";
+    string result(n - 4, '3');
+
+    if(n&1)
+        result += "6366";
+    else {
+        result += "3366";
+    }
+
+    return result;
+}
 
 void solve() {
     ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
 
-
-    pr(ans);
+    cin >> n;
+    pr(sol(n));
 }
 
 int main() {

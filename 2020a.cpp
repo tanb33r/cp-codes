@@ -37,14 +37,37 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll n,k;
+    cin>>n>>k;
+    ll kk = k;
+//    ll q = n/k;
+//    ll rem = n-q;
+//    ll ans = q/k;
+//
+    ll ans = 0 ;
+    if(k==1 or k>n)
+        ans = n;
+    else {
+        if(k<n) {
+            while(k<=n)k*=kk;
+            k/=kk;
+        }
+        while(n>0) {
+//            debb(k,kk,n);
+            while(k>n and k>kk) k/=kk;
+            if(k>n) {
+                ans+=n;
+                n=0;
+            }
+            if(k==1) {
+                ans+=n;
+                n=0;
+            } else {
+                ans+=n/k;
+                n%=k;
+            }
+        }
     }
-    ll ans=0;
-
 
     pr(ans);
 }

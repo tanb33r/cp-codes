@@ -37,14 +37,26 @@ const int mod = 1e9+7;
 const int N = 1e5+7;
 
 void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+    ll n,k;
+    cin >> n >> k;
+    int b[k];
+    int c[k];
+    map<ll,ll> m;
+    f(i,k) {
+        cin >> b[i] >> c[i];
+        m[b[i]] += c[i];
     }
+    vector<ll> v;
+    for(auto k : m) {
+        v.pb(k.S);
+    }
+    sort(all(v));
+    reverse(all(v));
     ll ans=0;
-
+    f(i,n) {
+        if(i>=v.size()) break;
+        ans += v[i];
+    }
 
     pr(ans);
 }

@@ -39,14 +39,15 @@ const int N = 1e5+7;
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
+//    int a[n];
+    int b = 1;
     f(i,n) {
-        cin>>a[i];
+        cout<<b;
+        b=0;
     }
-    ll ans=0;
+    newl;
 
-
-    pr(ans);
+//    pr(ans);
 }
 
 int main() {

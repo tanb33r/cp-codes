@@ -39,14 +39,25 @@ const int N = 1e5+7;
 void solve() {
     ll n;
     cin>>n;
-    int a[n];
-    f(i,n) {
+    int a[2*n];
+    ll cnt1=0;
+    ll mn=0;
+    ll mx=n;
+    f(i,2*n) {
         cin>>a[i];
+        cnt1+=(a[i]==1);
     }
-    ll ans=0;
+    if(cnt1<n){
+     mn = cnt1%2;
+     mx = cnt1;
+    }
+    else{
+     mn = cnt1%2;
+     mx = n-(cnt1-n);
+    }
 
 
-    pr(ans);
+    pr(mn<<' '<<mx);
 }
 
 int main() {

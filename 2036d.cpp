@@ -23,7 +23,7 @@
 #define cbit(n,p)          ((n)&(1LL<<(p)))
 #define sbit(n,p)          ((n)|(1LL<<(p)))
 #define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(_VA_ARGS_)
 //#define  cerr               if(0)cerr
 using namespace std;
 void dbg_out() {
@@ -36,15 +36,46 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
+string s[1005];
+ll vis[3005];
+ll n,m;
 
+ll fnc(ll skip) {
+    string ss;
+
+    memset(vis,0,sizeof(vis));
+    for(int i=skip; i<m-skip; i++) {
+        ss+=s[skip][i];
+    }
+    for(int i=skip+1; i<n-skip; i++) {
+        ss+=s[i][m-skip-1];
+    }
+    for(int i=m-skip-2; i>=skip; i--) {
+        ss+=s[n-skip-1][i];
+    }
+    for(int i=n-skip-2; i>=skip+1; i--) {
+        ss+=s[i][skip];
+    }
+    //debb(skip<<" "<<ss);
+    ll sz=ss.size(), cnt=0;
+    ss+=ss;
+
+    for(int i=0; i<sz; i++)
+        if(ss[i]=='1' and ss[i+1]=='5' and ss[i+2]=='4' and ss[i+3]=='3')
+            cnt++;
+
+    return cnt;
+}
+
+void solve() {
+    cin>>n>>m;
+
+    f(i,n) cin>>s[i];
+
+    ll mn=min(n,m);
+    ll ans=0;
+    for(ll i=0; i<mn/2; i++)
+        ans+=fnc(i);
 
     pr(ans);
 }

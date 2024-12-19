@@ -40,11 +40,41 @@ void solve() {
     ll n;
     cin>>n;
     int a[n];
-    f(i,n) {
-        cin>>a[i];
-    }
-    ll ans=0;
 
+    f(i,n) cin>>a[i];
+
+    int dis = 0;
+    for (int i = 1; i < n; ++i) {
+        if (a[i] == a[i - 1])
+            ++dis;
+    }
+
+    int ans = dis;
+
+    for (int i = 0; i < n / 2; ++i) {
+        int j = n - i - 1;
+
+        int curr = dis;
+
+        if (i > 0 and a[i] == a[i-1])      curr--;
+        if (i + 1 < n and a[i] == a[i+1])  curr--;
+        if (j > 0 and a[j] == a[j-1])      curr--;
+        if (j + 1 < n and a[j] == a[j+1])  curr--;
+
+        swap(a[i], a[j]);
+
+        if (i > 0 and a[i] == a[i-1])      curr++;
+        if (i + 1 < n and a[i] == a[i+1])  curr++;
+        if (j > 0 and a[j] == a[j-1])      curr++;
+        if (j + 1 < n and a[j] == a[j+1])  curr++;
+
+//        if(curr>=ans){
+//        }
+
+//        else
+        ans = min(ans, curr);
+        swap(a[i], a[j]);
+    }
 
     pr(ans);
 }

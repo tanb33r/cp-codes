@@ -36,17 +36,53 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-void solve() {
-    ll n;
-    cin>>n;
-    int a[n];
-    f(i,n) {
-        cin>>a[i];
+ll countRightTriangles(vector<pair<int, int>>& points) {
+    unordered_map<int, int> countX, countY;
+    map<pair<int, int>,int> mp;
+    for (auto& point : points) {
+        countX[point.F]++;
+        countY[point.S]++;
+        mp[ {point.F,point.S}]++;
     }
-    ll ans=0;
+
+    ll ans = 0;
+
+    //    for (auto& point : points) {
+//     debb(point.F,point.S);
+//    }
+    for (auto& point : points) {
+        int x = point.F;
+        int y = point.S;
+        ans += (countX[x] - 1) * (countY[y] - 1);
+    }
+    int n = points.size();
+
+    ll k=0;
+    for(int i = 0; i < n; i++) {
 
 
-    pr(ans);
+        if(!mp[ {points[i].F+2,points[i].S}])
+            continue;
+        //debb("ase");
+//        debb("asd");
+        if(mp[ {points[i].F+1, !points[i].S}])k++;
+    }
+
+    return ans+k;
+}
+
+void solve() {
+    int n;
+    cin >> n;
+    vector<pair<int, int>> p(n);
+
+    for (int i = 0; i < n; ++i) {
+        int x, y;
+        cin >> x >> y;
+        p[i] = {x, y};
+    }
+
+    pr(countRightTriangles(p));
 }
 
 int main() {
