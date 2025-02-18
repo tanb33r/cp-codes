@@ -7,7 +7,8 @@ typedef long long Long;
 using namespace std;
 
 
-while(r - l > 1) {
+while(r - l > 1)
+{
     int m = (l + r) / 2;
     if(check(m, x, a))
         l = m;
@@ -19,36 +20,59 @@ ans += check(ans+1) && ans+1<=limit; // important
 
 int ans=l;
 int l=0, r=n;
-while(l<=r) {
+while(l<=r)
+{
     int mid=(l+r)/2;
     int num=0;
 
-    if(check(m)) {
+    if(check(m))
+    {
         l=mid+1;
-    } else r=mid-1;
+    }
+    else r=mid-1;
 }
 
 
 
 
-//int BS(int lo, int hi, Long x,int a[])
-//{
-//    if (hi < lo )
-//        return 0;
-//    int mid = lo +(hi-lo)/2 ;
-//    if (a[mid] > x)
-//        return BS(lo, mid-1, x, a);
-//
-//    else if ( a[mid] < x )
-//        return BS(mid+1, hi, x, a);
-//
-//    else
-//        return 1 + BS(lo, mid-1, x, a) + BS(mid+1, hi, x, a);
-//}
+int binarySearch(int left, int right, ll target,int arr[])
+{
+    if (right < left )
+        return -1; // -1 = target value doesn't exist
 
-int main() {
-    int a[] = {1,2,3,3,3,3,3,4};
-    int x = BS(0,7,3,a);
+    int mid = left + (right-left)/2;
+
+    if (arr[mid] == x)
+        return mid;
+
+    if (arr[mid] < target)
+        return binarySearch(mid+1, right, target, arr);
+    else
+        return binarySearch(left, mid-1, target, arr);
+}
+
+int main()
+{
+
+    int arr[] = {1, 8, 14, 15, 26, 37, 48, 49, 59, 60, 80};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int target = 59;
+    int left = 0, right = n-1;
+//    while(right > left) {
+//        int middle = (left + right) / 2; // divide in middle
+//        if(arr[middle] <= target)
+//            left = middle;
+//        else
+//            right = middle - 1;
+//    }
+
+    int ans = binarySearch(left, right, target, arr);
+
+    if(arr[ans] != target)
+        cout<<"The number doesn't exist\n";
+    else
+        cout<<ans<<'\n';
 }
 
 
