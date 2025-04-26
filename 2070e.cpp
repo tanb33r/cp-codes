@@ -17,38 +17,30 @@
 #define deb(x)             cerr<<(#x)<<" = "<<x<<"\n"
 #define hmm(x)             cout<<((x)?"YES":"NO")<<"\n";
 #define ll                 long long
-#define pii                pair<long long,long long>
+#define pii                pair<int,int>
 #define sz(x)              ((int)x.size())
 #define II                 ({ll t;cin>>t;t;})
 #define cbit(n,p)          ((n)&(1LL<<(p)))
 #define sbit(n,p)          ((n)|(1LL<<(p)))
 #define tbit(n,p)          ((n)^(1LL<<(p)))
-#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(VA_ARGS)
+#define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(__VA_ARGS__)
 //#define  cerr               if(0)cerr
 using namespace std;
-void dbg_out()
-{
+void dbg_out() {
     cerr << endl;
 }
-template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T)
-{
+template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
     cerr << ' ' << H;
     dbg_out(T...);
 }
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-ll arr[200005];
-ll crr[200005];
-ll brr[200005];
-ll n,m,k;
-void solve()
-{
-    ll l,r,i,j,a,b,c;
+void solve() {
+    ll n;
     cin >> n;
     int a[n];
-    for(i=0; i<n; i++)
-    {
+    f(i,n) {
         cin >> a[i];
     }
     ll ans=0;
@@ -57,8 +49,7 @@ void solve()
     pr(ans);
 }
 
-int main()
-{
+int main() {
     ios::sync_with_stdio(0),cin.tie(0);
     int t=1;
     cin>>t;

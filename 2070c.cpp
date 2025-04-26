@@ -38,23 +38,68 @@ template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T)
 const int mod = 1e9+7;
 const int N = 1e5+7;
 
-ll arr[200005];
-ll crr[200005];
-ll brr[200005];
+ll arr[300005];
+//ll crr[200005];
+//ll brr[200005];
 ll n,m,k;
+string s;
+ll fnc(ll val)
+{
+    ll i,j;
+
+    for(i=0,j=0; i<n; i++)
+    {
+        if(s[i]=='B'&& arr[i]>val)
+        {
+            while(!(s[i]=='R'&& arr[i]>val))
+            {
+                i++;
+                if(i==n) break;
+            }
+            j++;
+        }
+    }
+    if(j>m) return 0;
+    return 1;
+}
+
+ll bs(ll l,ll r)
+{
+    ll i,j,mid;
+
+    while(r-l>=3)
+    {
+        mid=(r+l)/2;
+        i=fnc(mid);
+        if(i==1)
+        {
+            r=mid;
+        }
+        else l=mid;
+    }
+
+    while(l<=r)
+    {
+        i=fnc(l);
+        if(i==1) return l;
+        l++;
+    }
+    return r;
+}
+
 void solve()
 {
     ll l,r,i,j,a,b,c;
-    cin >> n;
-    int a[n];
+
+    cin>>n>>m;
+    cin>>s;
     for(i=0; i<n; i++)
     {
-        cin >> a[i];
+        cin>>arr[i];
     }
-    ll ans=0;
-
-
-    pr(ans);
+    ll ans = bs(0,1000000000);
+    cout<<ans<<'\n';
+//    cout<<ans<<endl;
 }
 
 int main()

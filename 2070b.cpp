@@ -45,16 +45,43 @@ ll n,m,k;
 void solve()
 {
     ll l,r,i,j,a,b,c;
-    cin >> n;
-    int a[n];
+    string s;
+    cin>>n>>m>>k;
+    ll chk=0,cnt=0;
+    cin>>s;
+    a=0;
     for(i=0; i<n; i++)
     {
-        cin >> a[i];
+        if(s[i]=='L') a--;
+        else a++;
+        cnt++;
+        if(a==0)
+        {
+            chk=1;
+            break;
+        }
     }
-    ll ans=0;
-
-
-    pr(ans);
+    a=m;
+    for(i=0; i<n; i++)
+    {
+        if(s[i]=='L') a--;
+        else a++;
+        if(a==0) break;
+    }
+    ll ans=1;
+    if(i==n)
+    {
+        cout<<0<<endl;
+    }
+    else
+    {
+        k-=(i+1);
+        if(chk==1)
+        {
+            ans+=k/cnt;
+        }
+        cout<<ans<<endl;
+    }
 }
 
 int main()

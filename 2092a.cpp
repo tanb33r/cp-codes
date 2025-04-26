@@ -44,17 +44,20 @@ ll brr[200005];
 ll n,m,k;
 void solve()
 {
-    ll l,r,i,j,a,b,c;
+    ll l,r,i,j,b,c;
     cin >> n;
     int a[n];
+    int mi = 1e9+1;
+    int mx = 0;
     for(i=0; i<n; i++)
     {
         cin >> a[i];
+        mi = min(mi,a[i]);
+        mx = max(mx,a[i]);
     }
-    ll ans=0;
 
 
-    pr(ans);
+    pr(mx-mi);
 }
 
 int main()
@@ -65,3 +68,4 @@ int main()
     while(t--)
         solve();
 }
+

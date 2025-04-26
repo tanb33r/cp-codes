@@ -38,7 +38,7 @@ while(l<=r)
 int binarySearch(int left, int right, ll target,int arr[])
 {
     if (right < left )
-        return -1; // -1 = target value doesn't exist
+        return -1; // -1 = target value does not exist
 
     int mid = left + (right-left)/2;
 
@@ -59,18 +59,18 @@ int main()
 
     int target = 59;
     int left = 0, right = n-1;
-//    while(right > left) {
-//        int middle = (left + right) / 2; // divide in middle
-//        if(arr[middle] <= target)
-//            left = middle;
-//        else
-//            right = middle - 1;
-//    }
+    while(right > left) {
+        int middle = (left + right) / 2; // divide in middle
+        if(arr[middle] <= target)
+            left = middle;
+        else
+            right = middle - 1;
+    }
 
     int ans = binarySearch(left, right, target, arr);
 
     if(arr[ans] != target)
-        cout<<"The number doesn't exist\n";
+        cout<<"The number does not exist\n";
     else
         cout<<ans<<'\n';
 }

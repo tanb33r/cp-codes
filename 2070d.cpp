@@ -26,39 +26,80 @@
 #define debb(...)          cerr << "\t[" << #__VA_ARGS__ << "]:\t", dbg_out(VA_ARGS)
 //#define  cerr               if(0)cerr
 using namespace std;
-void dbg_out()
-{
+void dbg_out() {
     cerr << endl;
 }
-template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T)
-{
+template<typename Head, typename... Tail> void dbg_out(Head H, Tail... T) {
     cerr << ' ' << H;
     dbg_out(T...);
 }
-const int mod = 1e9+7;
+const int mod = 998244353;
 const int N = 1e5+7;
 
-ll arr[200005];
-ll crr[200005];
-ll brr[200005];
+ll arr[300005];
+ll crr[300005];
+ll brr[300005];
+ll drr[300005];
+vector<ll>graph[300005];
 ll n,m,k;
-void solve()
-{
-    ll l,r,i,j,a,b,c;
-    cin >> n;
-    int a[n];
-    for(i=0; i<n; i++)
-    {
-        cin >> a[i];
+
+void dfs(ll src, ll par,ll lvl){
+    ll i,j,a,b;
+    brr[src]=lvl;
+    for(i=0;i<graph[src].size();i++){
+        a=graph[src][i];
+        if(arr[src]==a){
+            continue;
+        }
+        dfs(a,src,lvl+1);
     }
-    ll ans=0;
+}
+vector<pii>v;
 
+void solve() {
+    ll l,r,i,j,a,b,c;
 
-    pr(ans);
+    cin>>n;
+
+    for(i=2; i<=n; i++) {
+        cin>>arr[i];
+        graph[i].push_back(arr[i]);
+        graph[arr[i]].push_back(i);
+    }
+    dfs(1,-1,1);
+
+    for(i=1;i<=n;i++){
+        v.push_back({brr[i],i});
+    }
+    sort(v.begin(),v.end());
+    reverse(v.begin(),v.end());
+
+    for(i=0;i<v.size();i++){
+        ll src=v[i].second;
+        ll lvl = v[i].first;
+        ll cnt=0;
+        for(j=0;j<graph[src].size();j++){
+            a=graph[src][j];
+            if(a==arr[src]) continue;
+            cnt=(crr[a]+cnt)%mod;
+        }
+        if(src!=1) crr[src]=((drr[lvl+1]-cnt)+1+mod)%mod;
+        else crr[src] = (cnt+1)%mod;
+        drr[lvl]=(drr[lvl]+crr[src])%mod;
+    }
+
+    cout<<crr[1]<<'\n';
+
+    v.clear();
+    for(i=0;i<=n;i++){
+        graph[i].clear();
+        crr[i]=0;
+        drr[i]=0;
+        brr[i]=0;
+    }
 }
 
-int main()
-{
+int main() {
     ios::sync_with_stdio(0),cin.tie(0);
     int t=1;
     cin>>t;
